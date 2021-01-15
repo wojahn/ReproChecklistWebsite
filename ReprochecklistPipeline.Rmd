@@ -34,6 +34,12 @@ All of the data we produced can be downloaded from the folder in the link below:
 
 [Click Here to See Data](https://drive.google.com/drive/folders/1hFFJV7yO2gc8GyYsffFSttXXI2p8iMmi?usp=sharing)
 
+# Package Availability
+You can download the Reprochecklist package from GitHub usinf the install_github package from devtools
+```{r, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("wojahn/Reprochecklist")
+```
 
 # Preprocess raw GBIF file into smaller files
 After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM
