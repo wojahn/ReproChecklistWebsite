@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="" />
+
+<meta name="date" content="2021-01-18" />
+
+<title>Reproducible Pipeline</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Reprochecklist</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="ReproducibleCode.html">Reproducible Pipeline</a>
+</li>
+<li>
+  <a href="Figures.html">Analysis Figures</a>
+</li>
+<li>
+  <a href="Tables.html">Analysis Tables</a>
+</li>
+<li>
+  <a href="Lexicon.html">Download the Reprochecklist</a>
+</li>
+<li>
+  <a href="References.html">References</a>
+</li>
+<li>
+  <a href="Funding.html">Funding</a>
+</li>
+<li>
+  <a href="License.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Reproducible Pipeline</h1>
+<h4 class="date">2021-01-18</h4>
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+</script>
+<div id="data-availability" class="section level1">
+<h1><span class="header-section-number">1</span> Data Availability</h1>
+<p>The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:</p>
+<p><a href="https://doi.org/10.15468/dl.b3bvpw">Click Here to See GBIF Data</a></p>
+<p>All of the data we produced can be downloaded from the folder in the link below:</p>
+<p><a href="https://drive.google.com/drive/folders/1hFFJV7yO2gc8GyYsffFSttXXI2p8iMmi?usp=sharing">Click Here to See Data</a></p>
+</div>
+<div id="package-availability" class="section level1">
+<h1><span class="header-section-number">2</span> Package Availability</h1>
+<p>You can download the <em>Reprochecklist</em> package from GitHub using the install_github package from devtools</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;wojahn/Reprochecklist&quot;)</code></pre>
+</div>
+<div id="preprocess-raw-gbif-file-into-smaller-files" class="section level1">
+<h1><span class="header-section-number">3</span> Preprocess raw GBIF file into smaller files</h1>
+<p>After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM</p>
+<pre class="r"><code># Make intermediate
+system(&quot;cut  -f 1,6,9,10,22,23,33,41,45 8September2020GBIFTracheophyta.csv &gt; 8Sep2020GBIFSmall.tab&quot;)
+# Move original to external drive or delete it to conserve memory
+# Cut out GBIF IDs
+system(&quot;cut  -f 1 8Sep2020GBIFSmall.tab &gt; gbifID.tab&quot;)
+# Cut out classes
+system(&quot;cut  -f 2 8Sep2020GBIFSmall.tab &gt; class.tab&quot;)
+# Cut out genera
+system(&quot;cut  -f 3 8Sep2020GBIFSmall.tab &gt; genus.tab&quot;)
+# Cut out species
+system(&quot;cut  -f 4 8Sep2020GBIFSmall.tab &gt; species.tab&quot;)
+# Cut out latitude
+system(&quot;cut  -f 5 8Sep2020GBIFSmall.tab &gt; dLat.tab&quot;)
+# Cut out longitude
+system(&quot;cut  -f 6 8Sep2020GBIFSmall.tab &gt; dLong.tab&quot;)
+# Cut out year
+system(&quot;cut  -f 7 8Sep2020GBIFSmall.tab &gt; year.tab&quot;)
+# Cut out ider name
+system(&quot;cut  -f 8 8Sep2020GBIFSmall.tab &gt; IDdBy.tab&quot;)
+# Cut out recorder name
+system(&quot;cut  -f 9 8Sep2020GBIFSmall.tab &gt; RecrdedBy.tab&quot;)
+# Cut out GBIF ID and year combo
+system(&quot;cut  -f 1,7 8Sep2020GBIFSmall.tab &gt; gbifYearandID.tab&quot;)
+# Cut out GBIF ID and species combo
+system(&quot;cut  -f 1,4 8Sep2020GBIFSmall.tab &gt; IDandSpp.tab&quot;)</code></pre>
+</div>
+<div id="inferring-raw-hotspot-species-list" class="section level1">
+<h1><span class="header-section-number">4</span> Inferring raw hotspot species list</h1>
+<p>We downloaded occurrence data for Tracheophytes (vascular plants) with physical specimens from GBIF on 8 September 2020 (GBIF, 2020). A database of species occurring in the 36 BHs was inferred by the function HotspotOverlappeR using overlapping points derived from GBIF GPS data with shapefiles of the 36 hotspots (CEPF, 2016). The names of the hotspot(s) in which each taxon occurred were also recorded by the function. HotspotOverlappeR used maptools (Bivand et al., 2019) and sp (Pebesma et al., 2005).</p>
+<pre class="r"><code># Read in coordinate data, GBIF IDs, and species
+GBIFlat &lt;- read.delim(&quot;dLat.tab&quot;, sep = &quot;\t&quot;)
+GBIFlong &lt;- read.delim(&quot;dLong.tab&quot;, sep = &quot;\t&quot;)
+GBIFidspp &lt;- read.delim(&quot;IDandSpp.tab&quot;,sep=&quot;\t&quot;) #bc spp sometimes has tabs between them
+# Make file for overlapping
+ForOverlapping &lt;- data.frame(GBIFidspp,GBIFlat,GBIFlong)
+# Destroy old variables to conserve RAM
+rm(c(GBIFidspp,GBIFlat,GBIFlong))
+gc()
+# Overlap with hotspots shapefile
+HotspotsSpp &lt;- Reprochecklist::HotspotOverlappeR(ForOverlapping)
+write.csv(HotspotsSpp,&quot;HotspotSpp.csv&quot;,row.names=F)
+# Restrict to only species in hotspots
+TrueHotspotSpp &lt;- HotspotsSpp[!is.na(HotspotsSpp$InHotspot),]
+write.csv(TrueHotspotSpp,&quot;TrueHotspotSpp.csv&quot;,row.names=F)
+# Remove old variables to conserve memory
+rm(HotspotsSpp)
+gc()</code></pre>
+</div>
+<div id="curate-taxonomy" class="section level1">
+<h1><span class="header-section-number">5</span> Curate taxonomy</h1>
+<p>This database was then taxonomically curated using the TPL_Synonym_CheckeR, WFO_Synonym_CheckR and TaxonomyHarmonizeR functions from our package Geochecklist. Taxonomical curation prioritized the nomenclature of the more recently updated World Flora Online (WFO, 2020) while using the more comprehensive (but older) The Plant List (TPL, 2013) for taxa not in the WFO.</p>
+<pre class="r"><code># Make unique list of all species-level occurrences
+UniqueHSpp &lt;- unique(as.vector(TrueHotspotSpp$Species))
+# Remove non-BH occurrences
+UniqueHSpp &lt;- UniqueHSpp[!UniqueHSpp == &quot;&quot;]
+# Compare taxonomy with The Plant List
+TPL_Curated &lt;- Reprochecklist::TPL_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(TPL_Curated,&quot;TPL_Curated.csv&quot;,row.names = F)
+# Compare taxonomy with World Flora Online
+WF_Curated &lt;- Reprochecklist::WFO_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(WF_Curated,&quot;WF_Curated.csv&quot;,row.names = F)
+# Harmonize taxonomy between TPL and WFO, prioritizing WFO
+CuratedHSpp &lt;- Reprochecklist::TaxonomyHarmonizeR(TPL_Curated, WF_Curated, UniqueHSpp)
+write.csv(CuratedHSpp,&quot;CuratedHSpp.csv&quot;,row.names = F)
+# Now apply this harmonized taxonomical framework to GBIF species
+UpdatedGBIFHSpp &lt;- Reprochecklist::GBIFTaxonomicalHarmonizeR(TrueHotspotSpp,CuratedHSpp)
+# Update column name
+colnames(UpdatedGBIFHSpp)[6] &lt;- &quot;GBIF_ID&quot;
+write.csv(UpdatedGBIFHSpp,&quot;UpdatedGBIFHSpp.csv&quot;,row.names=F)
+# Remove occurrences with empty taxonomical information
+ Reprochecklist &lt;- as.data.frame(UpdatedGBIFHSpp[!UpdatedGBIFHSpp$Species == &quot;&quot;,])
+ write.csv(Reprochecklist,&quot;Reprochecklist.csv&quot;,row.names=F)</code></pre>
+</div>
+<div id="calculate-number-of-collections-per-species-number-of-collections-total-and-skewness-statisitics" class="section level1">
+<h1><span class="header-section-number">6</span> Calculate number of collections per species, number of collections total, and skewness statisitics</h1>
+<p>The number of species in each BH was inferred using the function HotspotSpeciesCounteR using the outputs of HotspotOverlappeR and TaxonomyHarmonizeR. It also inferred the number of total collections per hotspot, the median number of collections per species in each hotspot, the standard deviation of the number of collections per species in each hotspot, and the Pearson’s moment coefficient of skewness of the number of collections per species in each hotspot. It used EnvStats internally (Millard, 2013).</p>
+<pre class="r"><code># Infer taxonomical information for BHs
+out &lt;- Reprochecklist::HotspotSpeciesCounteR(UpdatedGBIFHSpp)
+write.csv(out,&quot;HotspotSppInfo26Sep2020.csv&quot;,row.names=F)</code></pre>
+</div>
+<div id="extract-year-of-description-using-ipni" class="section level1">
+<h1><span class="header-section-number">7</span> Extract year of description using IPNI</h1>
+<p>Next we extracted the dates of description for each of the species in the curated list as well as for names that were eliminated during curation was done using the function IPNI_Description_Date_GetteR. This function used taxize (Chamberlain et al., 2013) internally. If a taxon in the curated list was not in IPNI but its synonym was, then its synonym’s date of description was used as its date of description. If multiple dates were returned the earliest date was used as the date of description. This process was done by the functions IPNITaxonomyHarmonizeR and IPNICleaneR in our package.</p>
+<pre class="r"><code># Make unique vector of all hotspot species
+AllHSpp &lt;- unique(as.vector(c(as.character(CuratedHSpp$AcceptedName),as.character(CuratedHSpp$OldName))))
+# Set entrez key (this one is depreciated, use your personal key)
+rentrez::set_entrez_key(&quot;b81698f0c342bc2bfb00b25999f21be50d08&quot;)
+# Get description dates
+IPNIyears &lt;- Reprochecklist::IPNI_Description_Date_GetteR(as.character(AllHSpp))
+write.csv(IPNIyears,&quot;IPNIyears.csv&quot;,row.names=F)
+# Harmonize IPNI taxonomy with curated list
+FinalIPNI &lt;- Reprochecklist::IPNITaxonomyHarmonizeR(IPNIyears,CuratedHSpp)
+write.csv(FinalIPNI,&quot;FinalIPNI.csv&quot;, row.names=F)
+# Do some stats
+length(which(FinalIPNI$DescriptionYear == &quot;NOT_IN_IPNI&quot;))
+# 30986 not in IPNI
+UniqueAccepteds &lt;- unique(as.vector(CuratedHSpp$AcceptedName))
+length(UniqueAccepteds)
+# 189491 total accepted names</code></pre>
+</div>
+<div id="make-collection-and-description-yearly-curves" class="section level1">
+<h1><span class="header-section-number">8</span> Make collection and description yearly curves</h1>
+<p>Then we analysed the GBIF collection year data for all of the hotspot species by constructing curves illustrating the number of collections per year. The same process was done for the IPNI year-of-description data, where the curve showed the number of descriptions per year. The function YearlyCollectionDescriptionPlotsMakeR performed this analysis for the overall data and coplotted the 2 resultant curves. Regressions were run on the collection and description data from 2009 to 2020 for collections and descriptions using RegressionPerformeR.</p>
+<pre class="r"><code># Set output directory if want it to be different than pwd
+OutDirectory &lt;- getwd()
+# Make yearly collection and description curves along with genus-only collection curve
+Reprochecklist::YearlyCollectionDescriptionCurvesMakeR(TrueHotspotSpp,GBIFid,FinalIPNI,OutDirectory)</code></pre>
+</div>
+<div id="make-hotspotwise-heatmaps" class="section level1">
+<h1><span class="header-section-number">9</span> Make hotspotwise heatmaps</h1>
+<p>Heatmaps of collection activity and description activity were generated using HeatmapMakeR. This function used gplots (Gregory et al., 2020) internally to create the heatmap and perform the clustering analyses. Labels were colored using visual inspection of clusters. Colrownumz and Descrownumz can be added to add group prefixes to the graph. They have the same order as would unique(UpdatedGBIFHSpp$HotspotName) as their first column and the group membership as a number in the second column.</p>
+<pre class="r"><code># Preprocess IPNI results
+IPNIReady &lt;- Reprochecklist::IPNIReadieR(FinalIPNI)
+write.csv(IPNIReady,&quot;IPNIReady.csv&quot;,row.names=F)
+# For first time set to null then add cluster order if desired
+Colrownumz &lt;- NULL
+Descrownumz &lt;- NULL
+# Set output directory if want it to be different than pwd
+OutDirectory &lt;- getwd()
+# Make collection and description heatmaps
+Reprochecklist::HeatmapMakeR(IPNIReady,UpdatedGBIFHSpp,OutDirectory,Colrownumz,Descrownumz)</code></pre>
+<p>Here is the collections heatmap:</p>
+<center>
+<a href=""><img src="CollectionHeatmap.jpg" title="ColBH" alt="ColBH" /></a>
+</center>
+<p>Here is the description heatmap:</p>
+<center>
+<a href=""><img src="DescHM.jpg" title="DescBH" alt="DescBH" /></a>
+</center>
+</div>
+<div id="perform-decision-tree-analysis" class="section level1">
+<h1><span class="header-section-number">10</span> Perform decision tree analysis</h1>
+<p>In order to calculate the levels of the Linnaean and Wallacean shortfalls for each GSB vascular plant species in each BH by running their Reprochecklist occurrences through a decision tree analysis that assigned to them a four levels of uncertainty associated with the Linnaean and Wallacean shortfall using the functions EOO_AOO_AnalyzeR and DecisionTreeMakeR (Fig. 1). The first part of the alarm code gives the decision tree’s assessment of its distribution (either UN for “unknown”, PK for “poorly known”, N for “narrow”, or W for “wide”), the second gives the width of the Linnaean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”), and the third gives the width of the Wallacean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”). This first decision of the tree first separated off those species that had only 1 GSB collection associated to them and scored them as UN;RR since their distribution/species delimitation cannot be inferred from a single occurrence (Fig. 1). This is equivalent to the IUCN data deficient category. The second decision was whether or not the EOO of the species fulfilled the minimum set by the user (grid size of 10km (100 km2) in our case). If it was smaller than the minimum area, we then made decision number 3.1 and examined the number of collections total and compared them to the minimum number of collections (also settable by the user, we chose 5). If there were fewer than the minimum number of collections, then the species was assigned as PK;OR (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and red for the Wallacean shortfall since it was poorly sampled in only a single place; Fig. 1). If there were more than the minimum number of collections, then the species was assigned as PK;OO (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and orange for the Wallacean shortfall since though it was only in a single place it was not poorly sampled; Fig. 1). EOO_AOO_AnalyzeR used raster (Hijmans, 2020) and ConR (Dauby, 2020) internally to calculate EOO and AOO.
+Going back to the second decision, if the EOO of the species fulfilled the minimum set by the user then we made decision number 3.2, where we determined whether or not the species’ distribution was wide or narrow. This was done by determining if the species’ AOO was less than 20% of its EOO (REF; Fig. 1). If it was, then the species was determined to be widespread, if no then it was determined to be narrowly spread. It is important to note that the decisions made after decision 3.2 were the same for each species regardless of its answer to previous questions.
+Next, then mean number of collections per 100 km2 cell of a species’ AOO was determined so as to grade the Wallacean shortfall of those species. If there were more than the minimum set by the user (we chose 5) then the species was graded as Wallacean green, if there were fewer than 5 it was graded as red. Finally, the average distance between samples was calculated so as to assess the Linnaean shortfall through analysing the possible circumscription of a species. If the average distance between samples was above the maximum set by the user (10 km in our case) then the species was graded as Linnaean orange or red, depending on the number of samples per cell (orange if above the minimum average collections per cell so as to account for possibly disjunct species distributions, red if below the minimum average collections per cell since whether or not a species is disjunct would require more sampling).</p>
+<pre class="r"><code>#Perform EOO and AOO analyses for each species for each BH
+combo &lt;- Reprochecklist::EOO_AOO_AnalyzeR(Reprochecklist,
+                                          MinArea = 100,
+                                          MinColl = 5, 
+                                          AEp = 0.2,
+                                          CellDistThresh = 10
+                                          samplesize = 500)
+
+#Construct the decision tree proper
+Tree &lt;- Reprochecklist::DecisionTreeMakeR(combo)</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

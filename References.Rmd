@@ -1,0 +1,75 @@
+---
+title: "References"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2: 
+    toc: FALSE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+# References
+Anderson, M. J. 1997. Carl Linnaeus: Father of Classification. United States: Enslow Publishers. ISBN 978-0-89490-786-9.
+Baldwin, B. G., Wagner, W. L. 2010. Hawaiian angiosperm radiations of North American origin. Annals of Botany. 105(6): 849–879. https://doi.org/10.1093/aob/mcq052
+Bini, L. M., Diniz‐Filho, J. A. F., Rangel, T. F. L. V. B., Bastos, R. P., & Pinto, M. P. 2006. Challenging Wallacean and Linnean shortfalls: Knowledge gradients and conservation planning in a BH. Diversity and Distributions. 12(5): 475–482. https://doi.org/10.1111/j.1366-9516.2006.00286.x
+Bivand R., Lewin-Koh, N. 2019. maptools: Tools for Handling Spatial Objects. R package version 0.9-9.
+Buerki S, Baker WJ. 2016. Collections-based research in the genomic era. Biological Journal of the Linnean Society. 117: 5-10. doi:10.1111/bij.12721
+Buerki S., Munzinger J., P.P. Lowry II, Callmander M.W. 2020. Two new genera of Sapindaceae (Cupanieae) from the southern Pacific: Lepidocupania and Neoarytera. Candollea. [in press]
+Buerki S., Phillipson P.B., Lowry II P.P., Callmander M.W. 2010. Molecular phylogenetics and morphological evidence support recognition of Gereaua, a new endemic genus of Sapindaceae from Madagascar. Systematic Botany. 35: 172-180. doi:10.1600/036364410790862669 (5-Year IF: 1.743)
+Callmander, M. W., Phillipson, P. B., Schatz, G. E., Andriambololonera, S., Rabarimanarivo, M., Rakotonirina, N., Raharimampionona, J., Chatelain, C., Gautier, L., Lowry, P. P. 2011. The endemic and non-endemic vascular flora of Madagascar updated. Plant Ecology and Evolution. 144(2): 121–125. https://doi.org/10.5091/plecevo.2011.513
+Cámara-Leret, R., Frodin, D. G., Adema, F., Anderson, C., Appelhans, M. S., Argent, G., Arias Guerrero, S., Ashton, P., Baker, W. J., Barfod, A. S., Barrington, D., Borosova, R., Bramley, G. L. C., Briggs, M., Buerki, S., Cahen, D., Callmander, M. W., Cheek, M., Chen, C.-W., … van Welzen, P. C. 2020. New Guinea has the world’s richest island flora. Nature. 584(7822): 579–583. https://doi.org/10.1038/s41586-020-2549-5
+CEPF [Critical Ecosystems Partnership Fund]. 2016. Announcing the world’s 36th BH: the North American coastal plain. https://www.cepf.net/node/4422
+CEPF [Critical Ecosystems Partnership Fund]. 2020. Atlantic Forest – Threats. https://www.cepf.net/our-work/biodiversity-hotspots/atlantic-forest/threats
+Chase, M. W.,  Hills, H. H. 1991. Silica gel: An ideal material for field preservation of leaf samples for DNA studies. TAXON. 40(2): 215–220. https://doi.org/10.2307/1222975
+Chamberlain, S., Szocs, E. 2013. taxize – taxonomic search and retrieval in R. F1000Research. 2:191. URL: http://f1000research.com/articles/2-191/v2.
+Cheek, M., Lughadha, E. N., Kirk, P., Lindon, H., Carretero, J., Looney, B., Douglas, B., Haelewaters, D., Gaya, E., Llewellyn, T., Ainsworth, A. M., Gafforov, Y., Hyde, K., Crous, P., Hughes, M., Walker, B. E., Forzza, R. C., Wong, K. M., Niskanen, T. 2020. New scientific discoveries: Plants and fungi. PLANTS, PEOPLE, PLANET. 2(5): 371–388. https://doi.org/10.1002/ppp3.10148
+Culley, T. M. 2013. Why vouchers matter in botanical research. Applications in Plant Sciences. 1(11): 1300076. https://doi.org/10.3732/apps.1300076
+Daly, D. C. 2020. Opinion: We have been in lockdown, but deforestation has not. Proceedings of the National Academy of Sciences. 117(40): 24609–24611. https://doi.org/10.1073/pnas.2018489117
+Devey, D. S., Forest, F., Rakotonasolo, F., Ma, P., Dentinger, B. T. M., Buerki, S. 2013. A snapshot of extinction in action: The decline and imminent demise of the endemic Eligmocarpus Capuron (Caesalpinioideae, Leguminosae) serves as an example of the fragility of Madagascan ecosystems. South African Journal of Botany. 89: 273–280. https://doi.org/10.1016/j.sajb.2013.06.013
+Dauby, G. 2020. ConR: Computation of Parameters Used in Preliminary Assessment of Conservation Status. R package version 1.3.0. https://CRAN.R-project.org/package=ConR
+Flannery, M. 2020. War and Herbaria: World War II and After. https://herbariumworld.wordpress.com/2020/06/29/war-and-herbaria-world-war-ii-and-after/
+GBIF.org (08 September 2020) GBIF Occurrence Download https://doi.org/10.15468/dl.b3bvpw
+Gaudeul, M., Rouhan, G. 2013. A plea for modern botanical collections to include DNA-friendly material. Trends in Plant Science. 18(4): 184–185. https://doi.org/10.1016/j.tplants.2012.12.006
+Gaiji, S., Chavan, V., Ariño, A. H., Otegui, J., Hobern, D., Sood, R., Robles, E. 2013. Content assessment of the primary biodiversity data published through GBIF network: Status, challenges and potentials. Biodiversity Informatics. 8(2): Article 2. https://doi.org/10.17161/bi.v8i2.4124
+Hawksworth, D. L.,  Cowie, R. H. 2013. The discovery of historically extinct, but hitherto undescribed, species: An under-appreciated element in extinction-rate assessments. Biodiversity and Conservation. 22(11): 2429–2432. https://doi.org/10.1007/s10531-013-0542-0
+Hijmans, R. J. 2020. raster: Geographic Data Analysis and Modeling. R package version 3.1-5. https://CRAN.R-project.org/package=raster
+Hortal, J., de Bello, F., Diniz-Filho, J. A. F., Lewinsohn, T. M., Lobo, J. M., & Ladle, R. J. 2015. Seven Shortfalls that Beset Large-Scale Knowledge of Biodiversity. Annual Review of Ecology, Evolution, and Systematics. 46(1): 523–549. https://doi.org/10.1146/annurev-ecolsys-112414-054400
+IUCN. 2001. IUCN Red List categories and criteria: Version 3.1. Prepared by IUCN Species Survival Commission. World Conservation Union, Gland, Switzerland and Cambridge, United Kingdom. Ii -30
+Millard S.P. 2013. EnvStats: An R Package for Environmental Statistics. Springer, New York. ISBN 978-1-4614-8455-4, <URL: http://www.springer.com>.
+Mittermeier, R.A., Gil, P.R., Hoffmann, M., Pilgrim, J., Brooks, T., Mittermeier, C.G., Lamoreux, J. and Da Fonseca, G.A.B. 2005. Hotspots Revisited: Earth’s Biologically Richest and Most Endangered Terrestrial Ecoregions, Conservation International. Sierra Madre, Cemex. 77(9): pp.968-6397.
+Mittermeier, R. A., Turner, W. R., Larsen, F. W., Brooks, T. M., & Gascon, C. 2011. Global Biodiversity Conservation: The Critical Role of Hotspots. In F. E. Zachos & J. C. Habel (Eds.), BHs: Distribution and Protection of Conservation Priority Areas (pp. 3–22). Springer. https://doi.org/10.1007/978-3-642-20992-5_1
+Moat, J. 2020. rCAT: Conservation Assessment Tools. R package version 0.1.6. https://CRAN.R-project.org/package=rCAT
+Munzinger, J., Lowry, P. P., Callmander, M. W., Buerki, S. 2020. A New Micro-Endemic Species of Alectryon (Sapindaceae) from Koghis Forest, New Caledonia. Systematic Botany. 45(1): 156–162. https://doi.org/10.1600/036364420X15801369352414
+Myers, N. 1988. Threatened biotas: "Hot spots" in tropical forests. Environmentalist. 8: 187–208. https://doi.org/10.1007/BF02240252
+Myers, N., Mittermeier, R., Mittermeier, C. et al. 2000. BHs for conservation priorities. Nature 403: 853–858.
+Noss, R. F., Platt, W. J., Sorrie, B. A., Weakley, A. S., Means, D. B., Costanza, J., Peet, R. K. 2015. How global BHs may go unrecognized: Lessons from the North American Coastal Plain. Diversity and Distributions. 21(2): 236–244. https://doi.org/10.1111/ddi.12278
+Okuyama, Y., Kato, M. (2009). Unveiling cryptic species diversity of flowering plants: Successful biological species identification of Asian Mitellausing nuclear ribosomal DNA sequences. BMC Evolutionary Biology. 9(1): 105. https://doi.org/10.1186/1471-2148-9-105
+Paton, A., Antonelli, A., Carine, M., Forzza, R. C., Davies, N., Demissew, S., Dröge, G., Fulcher, T., Grall, A., Holstein, N., Jones, M., Liu, U., Miller, J., Moat, J., Nicolson, N., Ryan, M., Sharrock, S., Smith, D., Thiers, B., … Dickie, J. 2020. Plant and fungal collections: Current status, future perspectives. PLANTS, PEOPLE, PLANET. 2(5): 499–514. https://doi.org/10.1002/ppp3.10141
+Paquin, P., Dupérré, N., Cokendolpher, J. C., White, K., Hedin, M. 2008. The fundamental importance of taxonomy in conservation biology: The case of the eyeless Cicurina bandida (Araneae : Dictynidae) of central Texas, including new synonyms and the description of the male of the species. Invertebrate Systematics. 22(2): 139–149. https://doi.org/10.1071/IS07044
+Pebesma, E.J., R.S. Bivand, 2005. Classes and methods for spatial data in R. R News 5 (2): https://cran.r-project.org/doc/Rnews/.
+Pimm, S.L., Joppa, L.N. 2015. How Many Plant Species are There, Where are They, and at What Rate are They Going Extinct? Annals of the Missouri Botanical Garden. 100(3): 170–176. https://doi.org/10.3417/2012018
+Redding, D.W. and Mooers, A.Ø. 2006. Incorporating Evolutionary Measures into Conservation Prioritization. Conservation Biology. 20: 1670-1678. doi:10.1111/j.1523-1739.2006.00555.x
+Ripple, W. J., Wolf, C., Newsome, T. M., Galetti, M., Alamgir, M., Crist, E., Mahmoud, M. I., Laurance, W. F., & 15, 364 Scientist Signatories from 184 Countries. 2017. World Scientists’ Warning to Humanity: A Second Notice. BioScience. 67(12): 1026–1028. https://doi.org/10.1093/biosci/bix125
+Shivanna, K. R. 2019. The ‘Sixth Mass Extinction Crisis’ and Its Impact on Flowering Plants. In K. G. Ramawat (Ed.), Biodiversity and Chemotaxonomy (pp. 15–42). Springer International Publishing. https://doi.org/10.1007/978-3-030-30746-2_2
+The Plant List. 2013. Version 1.1. Published on the Internet; http://www.theplantlist.org/
+Troudet, J., Vignes-Lebbe, R., Grandcolas, P., Legendre, F. 2018. The Increasing Disconnection of Primary Biodiversity Data from Specimens: How Does It Happen and How to Handle It? Systematic Biology. 67(6): 1110–1119. https://doi.org/10.1093/sysbio/syy044
+Turland, N. J., Wiersema, J. H., Barrie, F. R., Greuter, W., Hawksworth, D. L., Herendeen, P. S., Knapp, S., Kusber, W.-H., Li, D.-Z., Marhold, K., May, T. W., McNeill, J., Monro, A. M., Prado, J., Price, M. J., Smith, G. F. 2018. International Code of Nomenclature for algae, fungi, and plants (Shenzhen Code) adopted by the Nineteenth International Botanical Congress Shenzhen, China, July 2017. Koeltz Botanical Books. https://nhm.openrepository.com/handle/10141/622572
+UNEP-WCMC, IUCN. 2020. Protected Planet: The World Database on Protected Areas (WDPA) [Online], September 2020, Cambridge, UK: UNEP-WCMC and IUCN. Available at: www.protectedplanet.net.
+Warnes, G.R., Bolker, B., Bonebakker, L., Gentleman, R., Huber, W., Liaw, A., Lumley, T., Maechler, M., Magnusson, A., Moeller, S., Schwartz, M., Venables, B. 2020. gplots: Various R Programming Tools for Plotting Data. R package version 3.1.0. https://CRAN.R-project.org/package=gplots
+Williams K.J., Ford, A., Rosauer, D. F., De Silva, N., Mittermeier, R., Bruce, C., Larsen F. W., Margules, C.  2011. Forests of East Australia: The 35th BH. In: Zachos, F., Habel, J. (eds) BHs. Springer, Berlin, Heidelberg
+WFO (2020): World Flora Online. Published on the Internet; http://www.worldfloraonline.org.
+Zuljan, R. (2019) Armed Conflict Event Data. OnWar.com.

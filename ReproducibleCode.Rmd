@@ -1,0 +1,219 @@
+---
+title: "Reproducible Pipeline"
+subtitle: ""
+author: ""
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+# Data Availability
+
+The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:
+
+[Click Here to See GBIF Data](https://doi.org/10.15468/dl.b3bvpw)
+
+All of the data we produced can be downloaded from the folder in the link below:
+
+[Click Here to See Data](https://drive.google.com/drive/folders/1hFFJV7yO2gc8GyYsffFSttXXI2p8iMmi?usp=sharing)
+
+# Package Availability
+You can download the *Reprochecklist* package from GitHub using the install_github package from devtools
+```{r, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("wojahn/Reprochecklist")
+```
+
+# Preprocess raw GBIF file into smaller files
+After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM
+
+```{r, eval = FALSE}
+# Make intermediate
+system("cut  -f 1,6,9,10,22,23,33,41,45 8September2020GBIFTracheophyta.csv > 8Sep2020GBIFSmall.tab")
+# Move original to external drive or delete it to conserve memory
+# Cut out GBIF IDs
+system("cut  -f 1 8Sep2020GBIFSmall.tab > gbifID.tab")
+# Cut out classes
+system("cut  -f 2 8Sep2020GBIFSmall.tab > class.tab")
+# Cut out genera
+system("cut  -f 3 8Sep2020GBIFSmall.tab > genus.tab")
+# Cut out species
+system("cut  -f 4 8Sep2020GBIFSmall.tab > species.tab")
+# Cut out latitude
+system("cut  -f 5 8Sep2020GBIFSmall.tab > dLat.tab")
+# Cut out longitude
+system("cut  -f 6 8Sep2020GBIFSmall.tab > dLong.tab")
+# Cut out year
+system("cut  -f 7 8Sep2020GBIFSmall.tab > year.tab")
+# Cut out ider name
+system("cut  -f 8 8Sep2020GBIFSmall.tab > IDdBy.tab")
+# Cut out recorder name
+system("cut  -f 9 8Sep2020GBIFSmall.tab > RecrdedBy.tab")
+# Cut out GBIF ID and year combo
+system("cut  -f 1,7 8Sep2020GBIFSmall.tab > gbifYearandID.tab")
+# Cut out GBIF ID and species combo
+system("cut  -f 1,4 8Sep2020GBIFSmall.tab > IDandSpp.tab")
+```
+
+# Inferring raw hotspot species list
+We downloaded occurrence data for Tracheophytes (vascular plants) with physical specimens from GBIF on 8 September 2020 (GBIF, 2020).  A database of species occurring in the 36 BHs was inferred by the function HotspotOverlappeR using overlapping points derived from GBIF GPS data with shapefiles of the 36 hotspots (CEPF, 2016). The names of the hotspot(s) in which each taxon occurred were also recorded by the function. HotspotOverlappeR used maptools (Bivand et al., 2019) and sp (Pebesma et al., 2005).
+
+```{r, eval = FALSE}
+# Read in coordinate data, GBIF IDs, and species
+GBIFlat <- read.delim("dLat.tab", sep = "\t")
+GBIFlong <- read.delim("dLong.tab", sep = "\t")
+GBIFidspp <- read.delim("IDandSpp.tab",sep="\t") #bc spp sometimes has tabs between them
+# Make file for overlapping
+ForOverlapping <- data.frame(GBIFidspp,GBIFlat,GBIFlong)
+# Destroy old variables to conserve RAM
+rm(c(GBIFidspp,GBIFlat,GBIFlong))
+gc()
+# Overlap with hotspots shapefile
+HotspotsSpp <- Reprochecklist::HotspotOverlappeR(ForOverlapping)
+write.csv(HotspotsSpp,"HotspotSpp.csv",row.names=F)
+# Restrict to only species in hotspots
+TrueHotspotSpp <- HotspotsSpp[!is.na(HotspotsSpp$InHotspot),]
+write.csv(TrueHotspotSpp,"TrueHotspotSpp.csv",row.names=F)
+# Remove old variables to conserve memory
+rm(HotspotsSpp)
+gc()
+
+```
+
+# Curate taxonomy
+This database was then taxonomically curated using the TPL_Synonym_CheckeR, WFO_Synonym_CheckR and TaxonomyHarmonizeR functions from our package Geochecklist.  Taxonomical curation prioritized the nomenclature of the more recently updated World Flora Online (WFO, 2020) while using the more comprehensive (but older) The Plant List (TPL, 2013) for taxa not in the WFO.
+
+```{r, eval = FALSE}
+# Make unique list of all species-level occurrences
+UniqueHSpp <- unique(as.vector(TrueHotspotSpp$Species))
+# Remove non-BH occurrences
+UniqueHSpp <- UniqueHSpp[!UniqueHSpp == ""]
+# Compare taxonomy with The Plant List
+TPL_Curated <- Reprochecklist::TPL_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(TPL_Curated,"TPL_Curated.csv",row.names = F)
+# Compare taxonomy with World Flora Online
+WF_Curated <- Reprochecklist::WFO_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(WF_Curated,"WF_Curated.csv",row.names = F)
+# Harmonize taxonomy between TPL and WFO, prioritizing WFO
+CuratedHSpp <- Reprochecklist::TaxonomyHarmonizeR(TPL_Curated, WF_Curated, UniqueHSpp)
+write.csv(CuratedHSpp,"CuratedHSpp.csv",row.names = F)
+# Now apply this harmonized taxonomical framework to GBIF species
+UpdatedGBIFHSpp <- Reprochecklist::GBIFTaxonomicalHarmonizeR(TrueHotspotSpp,CuratedHSpp)
+# Update column name
+colnames(UpdatedGBIFHSpp)[6] <- "GBIF_ID"
+write.csv(UpdatedGBIFHSpp,"UpdatedGBIFHSpp.csv",row.names=F)
+# Remove occurrences with empty taxonomical information
+ Reprochecklist <- as.data.frame(UpdatedGBIFHSpp[!UpdatedGBIFHSpp$Species == "",])
+ write.csv(Reprochecklist,"Reprochecklist.csv",row.names=F)
+```
+
+
+# Calculate number of collections per species, number of collections total, and skewness statisitics
+
+The number of species in each BH was inferred using the function HotspotSpeciesCounteR using the outputs of HotspotOverlappeR and TaxonomyHarmonizeR. It also inferred the number of total collections per hotspot, the median number of collections per species in each hotspot, the standard deviation of the number of collections per species in each hotspot, and the Pearson’s moment coefficient of skewness of the number of collections per species in each hotspot. It used EnvStats internally (Millard, 2013).
+```{r, eval = FALSE}
+# Infer taxonomical information for BHs
+out <- Reprochecklist::HotspotSpeciesCounteR(UpdatedGBIFHSpp)
+write.csv(out,"HotspotSppInfo26Sep2020.csv",row.names=F)
+```
+
+# Extract year of description using IPNI
+	
+Next we extracted the dates of description for each of the species in the curated list as well as for names that were eliminated during curation was done using the function IPNI_Description_Date_GetteR.  This function used taxize (Chamberlain et al., 2013) internally.  If a taxon in the curated list was not in IPNI but its synonym was, then its synonym’s date of description was used as its date of description.  If multiple dates were returned the earliest date was used as the date of description. This process was done by the functions IPNITaxonomyHarmonizeR and IPNICleaneR in our package.
+```{r, eval = FALSE}
+# Make unique vector of all hotspot species
+AllHSpp <- unique(as.vector(c(as.character(CuratedHSpp$AcceptedName),as.character(CuratedHSpp$OldName))))
+# Set entrez key (this one is depreciated, use your personal key)
+rentrez::set_entrez_key("b81698f0c342bc2bfb00b25999f21be50d08")
+# Get description dates
+IPNIyears <- Reprochecklist::IPNI_Description_Date_GetteR(as.character(AllHSpp))
+write.csv(IPNIyears,"IPNIyears.csv",row.names=F)
+# Harmonize IPNI taxonomy with curated list
+FinalIPNI <- Reprochecklist::IPNITaxonomyHarmonizeR(IPNIyears,CuratedHSpp)
+write.csv(FinalIPNI,"FinalIPNI.csv", row.names=F)
+# Do some stats
+length(which(FinalIPNI$DescriptionYear == "NOT_IN_IPNI"))
+# 30986 not in IPNI
+UniqueAccepteds <- unique(as.vector(CuratedHSpp$AcceptedName))
+length(UniqueAccepteds)
+# 189491 total accepted names
+```
+
+
+# Make collection and description yearly curves
+Then we analysed the GBIF collection year data for all of the hotspot species by constructing curves illustrating the number of collections per year.  The same process was done for the IPNI year-of-description data, where the curve showed the number of descriptions per year.  The function YearlyCollectionDescriptionPlotsMakeR performed this analysis for the overall data and coplotted the 2 resultant curves.  Regressions were run on the collection and description data from 2009 to 2020 for collections and descriptions using RegressionPerformeR.
+
+```{r, eval = FALSE}
+# Set output directory if want it to be different than pwd
+OutDirectory <- getwd()
+# Make yearly collection and description curves along with genus-only collection curve
+Reprochecklist::YearlyCollectionDescriptionCurvesMakeR(TrueHotspotSpp,GBIFid,FinalIPNI,OutDirectory)
+
+```
+
+# Make hotspotwise heatmaps
+Heatmaps of collection activity and description activity were generated using HeatmapMakeR.  This function used gplots (Gregory et al., 2020) internally to create the heatmap and perform the clustering analyses. Labels were colored using visual inspection of clusters.  Colrownumz and Descrownumz can be added to add group prefixes to the graph. They have the same order as would unique(UpdatedGBIFHSpp$HotspotName) as their first column and the group membership as a number in the second column.
+
+```{r, eval = FALSE}
+# Preprocess IPNI results
+IPNIReady <- Reprochecklist::IPNIReadieR(FinalIPNI)
+write.csv(IPNIReady,"IPNIReady.csv",row.names=F)
+# For first time set to null then add cluster order if desired
+Colrownumz <- NULL
+Descrownumz <- NULL
+# Set output directory if want it to be different than pwd
+OutDirectory <- getwd()
+# Make collection and description heatmaps
+Reprochecklist::HeatmapMakeR(IPNIReady,UpdatedGBIFHSpp,OutDirectory,Colrownumz,Descrownumz)
+```
+
+Here is the collections heatmap:
+
+<center>
+[![ColBH](./CollectionHeatmap.jpg "ColBH")]()
+</center>
+
+Here is the description heatmap:
+
+<center>
+[![DescBH](./DescHM.jpg "DescBH")]()
+</center>
+
+# Perform decision tree analysis
+
+In order to calculate the levels of the Linnaean and Wallacean shortfalls for each GSB vascular plant species in each BH by running their Reprochecklist occurrences through a decision tree analysis that assigned to them a four levels of uncertainty associated with the Linnaean and Wallacean shortfall using the functions EOO_AOO_AnalyzeR and DecisionTreeMakeR (Fig. 1).  The first part of the alarm code gives the decision tree’s assessment of its distribution (either UN for “unknown”, PK for “poorly known”, N for “narrow”, or W for “wide”), the second gives the width of the Linnaean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”), and the third gives the width of the Wallacean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”). This first decision of the tree first separated off those species that had only 1 GSB collection associated to them and scored them as UN;RR since their distribution/species delimitation cannot be inferred from a single occurrence (Fig. 1). This is equivalent to the IUCN data deficient category. The second decision was whether or not the EOO of the species fulfilled the minimum set by the user (grid size of 10km (100 km2) in our case).  If it was smaller than the minimum area, we then made decision number 3.1 and examined the number of collections total and compared them to the minimum number of collections (also settable by the user, we chose 5). If there were fewer than the minimum number of collections, then the species was assigned as PK;OR (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and red for the Wallacean shortfall since it was poorly sampled in only a single place; Fig. 1).  If there were more than the minimum number of collections, then the species was assigned as PK;OO (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and orange for the Wallacean shortfall since though it was only in a single place it was not poorly sampled; Fig. 1).   EOO_AOO_AnalyzeR used raster (Hijmans, 2020) and ConR (Dauby, 2020) internally to calculate EOO and AOO.
+	Going back to the second decision, if the EOO of the species fulfilled the minimum set by the user then we made decision number 3.2, where we determined whether or not the species’ distribution was wide or narrow. This was done by determining if the species’ AOO was less than 20% of its EOO (REF; Fig. 1).  If it was, then the species was determined to be widespread, if no then it was determined to be narrowly spread.  It is important to note that the decisions made after decision 3.2 were the same for each species regardless of its answer to previous questions.
+	Next, then mean number of collections per 100 km2 cell of a species’ AOO was determined so as to grade the Wallacean shortfall of those species. If there were more than the minimum set by the user (we chose 5) then the species was graded as Wallacean green, if there were fewer than 5 it was graded as red.  Finally, the average distance between samples was calculated so as to assess the Linnaean shortfall through analysing the possible circumscription of a species. If the average distance between samples was above the maximum set by the user (10 km in our case) then the species was graded as Linnaean orange or red, depending on the number of samples per cell (orange if above the minimum average collections per cell so as to account for possibly disjunct species distributions, red if below the minimum average collections per cell since whether or not a species is disjunct would require more sampling).
+	
+```{r, eval = FALSE}
+#Perform EOO and AOO analyses for each species for each BH
+combo <- Reprochecklist::EOO_AOO_AnalyzeR(Reprochecklist,
+                                          MinArea = 100,
+                                          MinColl = 5, 
+                                          AEp = 0.2,
+                                          CellDistThresh = 10
+                                          samplesize = 500)
+
+#Construct the decision tree proper
+Tree <- Reprochecklist::DecisionTreeMakeR(combo)
+```
+
+

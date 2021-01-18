@@ -1,0 +1,38 @@
+﻿Hotspot Name,Predicted Species Richness,Number of Species in this study,Percent of Species in BH Not Found in Other BHs,Percentage of Prediction Completed,Number of Total Collections,Median Number of Collections per Species,Standard Deviation of the Average Number of Collections per Species,Pearson’s Moment Coefficient of Skewness
+Atlantic Forest,20000,21640,27.30%,108.20%,849559,10,88.58,6.7
+California Floristic Province,3488,9912,31.70%,284.20%,685293,9,156.25,4.53
+Cape Floristic Region,9000,10158,27.90%,112.90%,235143,10,38.64,4.96
+Caribbean Islands,13000,8950,41.30%,68.80%,166412,6,34.07,4.4
+Caucasus,6400,4797,19.50%,75.00%,72427,6,32.98,17.52
+Cerrado,12070,16250,15.30%,134.60%,465012,6,73.04,7.28
+Chilean Winter Rainfall and Valdivian Forests,3892,4260,49.60%,109.50%,48508,4,23.65,8.36
+Coastal Forests of Eastern Africa,4000,3978,13.40%,99.50%,32191,3,13.22,4.31
+East Melanesian Islands,8000,3188,29.30%,39.90%,35217,4,19.23,4.2
+Eastern Afromontane,7598,10655,35.80%,140.20%,155197,5,25.36,4.74
+Forests of East Australia,8257,9082,39.90%,110.00%,788679,32,134.85,3.33
+Guinean Forests of West Africa,9000,7312,45.30%,81.20%,187447,10,39.87,3.65
+Himalaya,10000,8989,21.00%,89.90%,115008,5,23.41,5.59
+Horn of Africa,5000,3301,30.00%,66.00%,21798,3,9.24,3.17
+Indo-Burma,13500,16777,36.60%,124.30%,298614,6,33.17,4.67
+Irano-Anatolian,6000,5293,30.70%,88.20%,29436,3,9.52,9.54
+Japan,5600,5906,26.00%,105.50%,1245830,33.5,436.62,5.03
+Madagascar and the Indian Ocean Islands,13000,11039,71.30%,84.90%,289535,10,48.06,5.69
+Madrean Pine-Oak Woodlands,5300,16875,14.10%,318.40%,603130,8,112.66,30.89
+Maputaland-Pondoland-Albany,8100,8849,28.60%,109.20%,192774,8,35.65,4.23
+Mediterranean Basin,22500,14829,52.20%,65.90%,1418332,12,223.95,4.57
+Mesoamerica,17000,26957,24.90%,158.60%,2256398,17,218.55,18.38
+Mountains of Central Asia,5500,3353,45.90%,61.00%,22759,3,14.44,20.22
+Mountains of Southwest China,12000,10893,29.50%,90.80%,311949,8,56,5.25
+New Caledonia,3270,3027,49.90%,92.60%,79740,10,46.37,4.48
+New Zealand,2300,6864,20.30%,298.40%,222215,6,68.89,5.85
+North American Coastal Plain,6200,11140,22.30%,179.70%,315388,6,56.39,6.38
+Philippines,9253,4835,30.90%,52.30%,40075,3,14.28,5.38
+Polynesia-Micronesia,5330,5287,29.60%,99.20%,55561,4,22.12,9.46
+Southwest Australia,5571,6577,64.00%,118.10%,492651,36,110.9,3.49
+Succulent Karoo,6356,6785,17.30%,106.70%,63539,4,15.15,4.84
+Sundaland,25000,13008,46.70%,52.00%,305626,6,50.53,6.61
+Tropical Andes,30000,34794,51.10%,116%,914425,6,64.63,8.53
+Tumbes-Choco-Magdalena,11000,11339,5.80%,103.10%,139870,4,21.66,4.86
+Wallacea,10000,5530,21.60%,55.30%,53867,4,16.38,4.54
+Western Ghats and Sri Lanka,5916,2277,28.70%,38.50%,7568,2,4.06,4.51
+,,,,,,,,

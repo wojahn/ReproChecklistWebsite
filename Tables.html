@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2021-01-18" />
+
+<title>Analysis Tables</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/jszip-1.10.20/jszip.min.js"></script>
+<script src="site_libs/pdfmake-1.10.20/pdfmake.js"></script>
+<script src="site_libs/pdfmake-1.10.20/vfs_fonts.js"></script>
+<link href="site_libs/dt-ext-buttons-1.10.20/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="site_libs/dt-ext-buttons-1.10.20/js/dataTables.buttons.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.flash.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.html5.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.colVis.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.print.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Reprochecklist</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="ReproducibleCode.html">Reproducible Pipeline</a>
+</li>
+<li>
+  <a href="Figures.html">Analysis Figures</a>
+</li>
+<li>
+  <a href="Tables.html">Analysis Tables</a>
+</li>
+<li>
+  <a href="Lexicon.html">Download the Reprochecklist</a>
+</li>
+<li>
+  <a href="References.html">References</a>
+</li>
+<li>
+  <a href="Funding.html">Funding</a>
+</li>
+<li>
+  <a href="License.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Analysis Tables</h1>
+<h4 class="date">2021-01-18</h4>
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+</script>
+<div id="species-richness-results-and-statistics-per-biodiversity-hotspot" class="section level1">
+<h1><span class="header-section-number">1</span> Species richness results and statistics per biodiversity hotspot</h1>
+<div id="htmlwidget-8f4c5f1b47b5138e63f0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8f4c5f1b47b5138e63f0">{"x":{"filter":"none","extensions":["Buttons"],"data":[["Atlantic Forest","California Floristic Province","Cape Floristic Region","Caribbean Islands","Caucasus","Cerrado","Chilean Winter Rainfall and Valdivian Forests","Coastal Forests of Eastern Africa","East Melanesian Islands","Eastern Afromontane","Forests of East Australia","Guinean Forests of West Africa","Himalaya","Horn of Africa","Indo-Burma","Irano-Anatolian","Japan","Madagascar and the Indian Ocean Islands","Madrean Pine-Oak Woodlands","Maputaland-Pondoland-Albany","Mediterranean Basin","Mesoamerica","Mountains of Central Asia","Mountains of Southwest China","New Caledonia","New Zealand","North American Coastal Plain","Philippines","Polynesia-Micronesia","Southwest Australia","Succulent Karoo","Sundaland","Tropical Andes","Tumbes-Choco-Magdalena","Wallacea","Western Ghats and Sri Lanka",""],[20000,3488,9000,13000,6400,12070,3892,4000,8000,7598,8257,9000,10000,5000,13500,6000,5600,13000,5300,8100,22500,17000,5500,12000,3270,2300,6200,9253,5330,5571,6356,25000,30000,11000,10000,5916,null],[21640,9912,10158,8950,4797,16250,4260,3978,3188,10655,9082,7312,8989,3301,16777,5293,5906,11039,16875,8849,14829,26957,3353,10893,3027,6864,11140,4835,5287,6577,6785,13008,34794,11339,5530,2277,null],["27.30%","31.70%","27.90%","41.30%","19.50%","15.30%","49.60%","13.40%","29.30%","35.80%","39.90%","45.30%","21.00%","30.00%","36.60%","30.70%","26.00%","71.30%","14.10%","28.60%","52.20%","24.90%","45.90%","29.50%","49.90%","20.30%","22.30%","30.90%","29.60%","64.00%","17.30%","46.70%","51.10%","5.80%","21.60%","28.70%",""],["108.20%","284.20%","112.90%","68.80%","75.00%","134.60%","109.50%","99.50%","39.90%","140.20%","110.00%","81.20%","89.90%","66.00%","124.30%","88.20%","105.50%","84.90%","318.40%","109.20%","65.90%","158.60%","61.00%","90.80%","92.60%","298.40%","179.70%","52.30%","99.20%","118.10%","106.70%","52.00%","116%","103.10%","55.30%","38.50%",""],[849559,685293,235143,166412,72427,465012,48508,32191,35217,155197,788679,187447,115008,21798,298614,29436,1245830,289535,603130,192774,1418332,2256398,22759,311949,79740,222215,315388,40075,55561,492651,63539,305626,914425,139870,53867,7568,null],[10,9,10,6,6,6,4,3,4,5,32,10,5,3,6,3,33.5,10,8,8,12,17,3,8,10,6,6,3,4,36,4,6,6,4,4,2,null],[88.58,156.25,38.64,34.07,32.98,73.04,23.65,13.22,19.23,25.36,134.85,39.87,23.41,9.24,33.17,9.52,436.62,48.06,112.66,35.65,223.95,218.55,14.44,56,46.37,68.89,56.39,14.28,22.12,110.9,15.15,50.53,64.63,21.66,16.38,4.06,null],[6.7,4.53,4.96,4.4,17.52,7.28,8.36,4.31,4.2,4.74,3.33,3.65,5.59,3.17,4.67,9.54,5.03,5.69,30.89,4.23,4.57,18.38,20.22,5.25,4.48,5.85,6.38,5.38,9.46,3.49,4.84,6.61,8.53,4.86,4.54,4.51,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Hotspot.Name<\/th>\n      <th>Predicted.Species.Richness<\/th>\n      <th>Number.of.Species.in.this.study<\/th>\n      <th>Percent.of.Species.in.BH.Not.Found.in.Other.BHs<\/th>\n      <th>Percentage.of.Prediction.Completed<\/th>\n      <th>Number.of.Total.Collections<\/th>\n      <th>Median.Number.of.Collections.per.Species<\/th>\n      <th>Standard.Deviation.of.the.Average.Number.of.Collections.per.Species<\/th>\n      <th>Pearson.s.Moment.Coefficient.of.Skewness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf","print"],"columnDefs":[{"className":"dt-right","targets":[1,2,5,6,7,8]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="descision-tree-results-and-statistics-per-biodiversity-hotspot" class="section level1">
+<h1><span class="header-section-number">2</span> Descision tree results and statistics per biodiversity hotspot</h1>
+<div id="htmlwidget-80c1125981a294709553" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-80c1125981a294709553">{"x":{"filter":"none","extensions":["Buttons"],"data":[["Atlantic Forest","California Floristic Province","Cape Floristic Region","Caribbean Islands","Caucasus","Cerrado","Chilean Winter Rainfall and Valdivian Forests","Coastal Forests of Eastern Africa","East Melanesian Islands","Eastern Afromontane","Forests of East Australia","Guinean Forests of West Africa","Himalaya","Horn of Africa","Indo-Burma","Irano-Anatolian","Japan","Madagascar and the Indian Ocean Islands","Madrean Pine-Oak Woodlands","Maputaland-Pondoland-Albany","Mediterranean Basin","Mesoamerica","Mountains of Central Asia","Mountains of Southwest China","New Caledonia","New Zealand","North American Coastal Plain","Philippines","Polynesia-Micronesia","Southwest Australia","Succulent Karoo","Sundaland","Tropical Andes","Tumbes-Choco-Magdalena","Wallacea","Western Ghats and Sri Lanka",""],[20,35,19,13,13,15,11,9,10,11,58,19,13,8,15,7,77,17,17,17,33,32,8,22,19,21,20,9,9,48,11,16,14,11,10,5,null],[29.15,36.13,31.66,35.2,36.52,35.51,45.42,48.06,46.61,36.39,20.67,27.69,50.76,52.74,41.41,60.17,21.74,26.12,29.21,33.19,28.98,22.93,54.31,38.08,29.7,39.34,38.79,49.64,45.55,16.42,52.17,37.6,33.97,43.09,48.52,72.2,null],[2.74,2.65,1.95,3.17,2.48,2.69,1.92,2.16,1.54,3.41,3.99,2.17,1.21,2.94,1.2,2.44,1.88,3.57,4.02,0.54,2.75,2.93,0.98,2.68,5.58,4.12,1.72,1.39,5.92,1.75,0.87,1.43,2.56,3.78,1.39,1.8,null],[66.28,58.67,62.99,58.49,59,60.16,51.43,48.27,50.72,57.77,72.09,68.74,46.87,42.2,56.71,35.84,74.52,67.91,63.88,64.98,65.82,71.93,43.93,57.86,59,54.91,58.52,47.67,44.98,78.49,44.97,59.93,61.57,50.63,48.88,23.8,null],[1.83,2.55,3.4,3.14,2,1.64,1.22,1.51,1.13,2.44,3.26,1.39,1.16,2.12,0.69,1.55,1.86,2.4,2.89,1.29,2.44,2.21,0.78,1.38,5.72,1.63,0.97,1.3,3.56,3.34,1.99,1.04,1.91,2.5,1.21,2.2,null],[0.15,0.32,0.02,0.12,0.02,0.26,0.09,0.15,0.5,0.38,0.91,0.22,0.03,0.39,0.04,0.11,0.1,0.21,0.26,0.01,0.17,0.18,0.06,0.09,0.17,0.15,0.13,0.12,0.34,0.11,0.01,0.11,0.2,0.51,0.02,0,null],[1.89,2.49,4.72,1.65,1.1,2.06,0.61,0.78,0.88,2.26,6.08,1.41,3.1,1.24,1.79,0.85,2.2,2.8,2.4,0.57,2.01,2.24,0.54,11.51,6.24,3.26,0.91,0.58,3.29,2.6,1.52,1.14,1.35,2.13,0.8,0.88,null],[97.97,97.19,95.26,98.22,98.87,97.67,99.3,99.07,98.62,97.35,93.01,98.37,96.86,98.36,98.17,99.04,97.7,96.99,97.34,99.42,97.82,97.58,99.4,88.4,93.59,96.59,98.96,99.3,96.37,97.29,98.47,98.75,98.45,97.35,99.19,99.12,null],[0.4,1.11,3.25,0.17,0.19,0.6,0.09,0.05,0.19,0.42,4.09,0.36,2.48,0.06,1.19,0.17,1.02,0.63,0.3,0.32,0.57,0.85,0.27,9.68,2.05,0.68,0.18,0.14,0.44,1.43,1.08,0.44,0.28,0.32,0.13,0.13,null],[1.54,1.57,1.48,1.52,0.92,1.61,0.52,0.78,0.82,1.91,2.73,1.08,0.63,1.21,0.61,0.74,1.24,2.21,2.14,0.25,1.48,1.45,0.3,1.85,4.26,2.67,0.74,0.43,2.91,1.22,0.44,0.75,1.13,1.98,0.69,0.75,null],[98.06,97.32,95.27,98.31,98.9,97.79,99.39,99.17,99,97.66,93.18,98.56,96.89,98.73,98.2,99.09,97.75,97.16,97.56,99.43,97.95,97.7,99.43,88.47,93.69,96.65,99.08,99.42,96.65,97.35,98.48,98.82,98.59,97.71,99.19,99.12,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Hotspot<\/th>\n      <th>Median.Collections.per.Species<\/th>\n      <th>Percent.Species.with.Only.1.Collection<\/th>\n      <th>Percent.Species...5.Collections<\/th>\n      <th>Percent.Widespread<\/th>\n      <th>Percent.Narrow<\/th>\n      <th>Percent.Linnaean.Green<\/th>\n      <th>Percent.Linnaean.Orange<\/th>\n      <th>Percent.Linnaean.Red<\/th>\n      <th>Percent.Wallacean.Green<\/th>\n      <th>Percent.Wallacean.Orange<\/th>\n      <th>Percent.Wallacean.Red<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf","print"],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="you-can-download-intermediate-tables-from-figshare-using-the-link-below" class="section level1">
+<h1><span class="header-section-number">3</span> You can download intermediate tables from FigShare using the link below:</h1>
+<p><a href="https://doi.org/10.15468/dl.b3bvpw">Click Here to Go to Download Page</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

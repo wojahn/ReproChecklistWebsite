@@ -1,0 +1,67 @@
+---
+title: "Analysis Tables"
+date: "`r Sys.Date()`"
+output:
+#  bookdown::pdf_document2:
+#    toc: TRUE
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+# Species richness results and statistics per biodiversity hotspot
+
+```{r lexicon, eval = T, echo=F, warning = FALSE, message=FALSE}
+lex3 <- read.csv("ReprochecklistStatsTab1.csv") 
+
+###~~~
+#Produce final table
+###~~~
+
+rownames(lex3) <- NULL
+###~~~
+#Plot timetable in doc
+###~~~
+#Plot table
+DT::datatable(lex3, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')), rownames= FALSE)
+```
+
+
+# Descision tree results and statistics per biodiversity hotspot
+
+```{r lexicon2, eval = T, echo=F, warning = FALSE, message=FALSE}
+lex2 <- read.csv("ReprochecklistDescisionTreeResults.csv") 
+
+###~~~
+#Produce final table
+###~~~
+
+rownames(lex2) <- NULL
+###~~~
+#Plot timetable in doc
+###~~~
+#Plot table
+DT::datatable(lex2, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')), rownames= FALSE)
+```
+
+# You can download intermediate tables from FigShare using the link below:
+
+
+[Click Here to Go to Download Page](https://doi.org/10.15468/dl.b3bvpw)
+

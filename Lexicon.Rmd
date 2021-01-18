@@ -1,0 +1,50 @@
+---
+title: "Download the Reprochecklist"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2: 
+    toc: FALSE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(kfigr)
+library(dplyr)
+library(kableExtra)
+library(DT)
+
+#Generate BibTex citation file for all R packages used to produce report
+#knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+
+
+# How to download the Reprochecklist file itself
+
+You can download the Reprochecklist file from FigShare by clicking the link below:
+
+[Click Here to Go to Download Page](https://doi.org/10.15468/dl.b3bvpw)
+

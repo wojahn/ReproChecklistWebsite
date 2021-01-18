@@ -1,0 +1,51 @@
+---
+title: "Funding"
+date: "`r Sys.Date()`"
+output:
+#  bookdown::pdf_document2:
+#    toc: TRUE
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:200px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+# Main Funders
+
+This R-package was primarily funded by LUSH and the National Geographic Society
+
+<center>
+[![TaBP](./NGSlogo.jpg "TaBP")]()
+</center>
+
+<center>
+[![TaBP](./LUSHlogo.jpg "TaBP")]()
+</center>
+
+# Acknowledgements
+
+The authors would like to acknowledge Patricia and Kevin Wojahn for providing the MacBook, electricity, and internet connection with which G2PMineR was developed.
+
+# Institution
+
+The authors are employees of Boise State University
+
+<center>
+[![TaBP](./Images/boisestate-primarylogo-2color-rgb.png "TaBP")]()
+</center>
+

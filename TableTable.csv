@@ -1,0 +1,29 @@
+﻿Step,Module,Table,Description
+1,1,meminv,Membership of abstract cluster groups
+2,2,AbstractsSpp,Taxonomical mining rsults
+2,2,SpeciesAbbrvs,"Abbreviated taxonomy, used in GenesLookeR"
+2,3,GenesOut,Gene mining results
+2,3,GeneGroups,Artificial gene groups
+2,3,GeneGrades,Grading the usefulness of gene matches according to our needs
+2,3,GeneFrequencySifteR,Sift genes based on a user-defined threshold of matches
+2,4,AbsPhen,Phenotype mining results
+2,5,GenesOutLong,Longform gene mining results
+2,5,AbstractsSppLong,Longform taxonomical mining results
+2,5,AbsPhenLong,Longform phenotype mining results
+2,5,ConsensusMatrix,Matrix showing abstracts passing consensus tests
+2,6,SppBarPlotDF,Input for taxonomical bar plot
+2,6,Genez,Truncated GenesOut wth Genes and IDs only
+2,6,GenesBarPlotDF,Input for gene bar plot
+2,6,PhenoBarPlotDF,Input for phenotypes bar plot
+2,6,SppInt,Internal matchwise distance matrix for Ta
+2,6,SppIntSmall,Top N only internal matchwise distance matrix for Ta
+2,6,GenInt,Internal matchwise distance matrix for G
+2,6,GenIntSmall,Top N only internal matchwise distance matrix for G
+2,6,PhenInt,Internal matchwise distance matrix for P
+2,6,PhenIntSmall,Top N only internal matchwise distance matrix for P
+3,7,PhenoSpecies,Phenotypes vs species inter-datatype matchwise distance matrix
+3,7,PhenoSpeciesSmall,Top N only phenotypes vs species inter-datatype matchwise distance matrix
+3,7,GeneSpecies,Genes vs species inter-datatype matchwise distance matrix
+3,7,GeneSpeciesSmall,Top N only genes vs species inter-datatype matchwise distance matrix
+3,7,PhenoGenes,Phenotypes vs genes inter-datatype matchwise distance matrix
+3,7,PhenoGenesSmall,Top N only phenotypes vs genes inter-datatype matchwise distance matrix

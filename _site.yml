@@ -1,0 +1,21 @@
+name: "Reprochecklist"
+output_dir: "."
+navbar:
+  title: "Reprochecklist"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Reproducible Pipeline"
+      href: ReproducibleCode.html
+    - text: "Analysis Figures"
+      href: Figures.html
+    - text: "Analysis Tables"
+      href: Tables.html
+    - text: "Download the Reprochecklist"
+      href: Lexicon.html
+    - text: "References"
+      href: References.html
+    - text: "Funding"
+      href: Funding.html
+    - text: "License"
+      href: License.html

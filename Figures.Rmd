@@ -1,0 +1,58 @@
+---
+title: "Analysis Figures"
+date: "`r Sys.Date()`"
+output:
+#  bookdown::pdf_document2:
+#    toc: TRUE
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+    theme: flatly
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+csl: AmJBot.csl
+bibliography: References.bib
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"ReprochecklistLogo.jpg\" style=\"position:absolute; top:0; right:0; padding:10px; height:150px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
+# Collection and description yearly curves
+
+
+Here are the yearly collection and description curves (blue is collection, orange is description, dotted is genus-only collections):
+
+<center>
+[![CDC](./OverallYearlyCollectionDescriptionCurves.jpg "CDC")]()
+</center>
+
+# Hotspotwise heatmaps
+
+
+Here is the collections heatmap:
+
+<center>
+[![ColBH](./CollectionHeatmap.jpg "ColBH")]()
+</center>
+
+Here is the description heatmap:
+
+<center>
+[![DescBH](./DescHM.jpg "DescBH")]()
+</center>
+
+# Decision tree analysis
+
+Here is the decision tree 
+
+<center>
+[![DT](./DecisionTree2.png "DT")]()
+</center>
