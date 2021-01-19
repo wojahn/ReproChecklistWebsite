@@ -39,7 +39,7 @@ This R-package was primarily funded by LUSH and the National Geographic Society
 
 # Acknowledgements
 
-The authors would like to acknowledge Patricia and Kevin Wojahn for providing the MacBook, electricity, and internet connection with which G2PMineR was developed.
+The authors would like to acknowledge Patricia and Kevin Wojahn for providing the MacBook, electricity, and internet connection with which Reprochecklist was developed.
 
 # Institution
 
