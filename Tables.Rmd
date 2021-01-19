@@ -63,5 +63,5 @@ DT::datatable(lex2, extensions = 'Buttons', options = list(dom = 'Blfrtip', butt
 # You can download intermediate tables from FigShare using the link below:
 
 
-[Click Here to Go to Download Page](https://doi.org/10.15468/dl.b3bvpw)
+[Click Here to Go to Download Page](https://doi.org/10.6084/m9.figshare.13611152)
 

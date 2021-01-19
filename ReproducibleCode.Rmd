@@ -25,7 +25,7 @@ $(document).ready(function() {
 });
 ```
 
-# Data Availability
+# Input Data Availability
 
 The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:
 
