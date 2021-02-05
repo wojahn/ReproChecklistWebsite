@@ -56,6 +56,10 @@ knitr::write_bib(.packages(), file = 'packages.bib')
 To answer our first research question, we created a taxonomically curated database of GSB vascular plant species occurrences in BHs (i.e. the Reprochecklist). We then used this database to infer trends of BH GSB vascular plant species collection and description between BHs and for the BH system as a whole. These trends were visualized as heatmaps (with each BH as a separate row) that were used to analyse differences in collection and description effort between BHs and as rate curves to assess the collection and description trends for the BH system as a whole.
 	To answer our second research question, we used a decision tree analysis that assigned to each BH GSB vascular plant taxon one of four levels of uncertainty associated with the Linnaean and Wallacean shortfalls (see Fig. 1 for a flow-chart illustrating the decisions that lead to each of the levels of uncertainty). Decisions were based on the number of collections total, the area of a taxon’s EOO, the area of a taxon’s AOO relative to its EOO, the mean number of collections in a 100 km2 cell, and the mean distance between contiguous groups of occupied 100km2 cells. The percent of species falling into each level of uncertainty was then assessed. This process was conducted for all GSB vascular plant species in the BH system as a whole and also individually just for the GSB vascular plant species in each BH.
 
+<center>
+[![ColBH](./Flowchart.png "ColBH")]()
+</center>
+
 # Installing Reprochecklist
 
 ## Dependencies

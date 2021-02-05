@@ -31,7 +31,7 @@ $(document).ready(function() {
 Here are the yearly collection and description curves (blue is collection, orange is description, dotted is genus-only collections):
 
 <center>
-[![CDC](./OverallYearlyCollectionDescriptionCurves.jpg "CDC")]()
+[![CDC](./Curves.png "CDC")]()
 </center>
 
 # Hotspotwise heatmaps
@@ -40,13 +40,13 @@ Here are the yearly collection and description curves (blue is collection, orang
 Here is the collections heatmap:
 
 <center>
-[![ColBH](./CollectionHeatmap.jpg "ColBH")]()
+[![ColBH](./CollectionsHM.png "ColBH")]()
 </center>
 
 Here is the description heatmap:
 
 <center>
-[![DescBH](./DescHM.jpg "DescBH")]()
+[![DescBH](./DescriptionsHM.png "DescBH")]()
 </center>
 
 # Decision tree analysis
@@ -54,5 +54,5 @@ Here is the description heatmap:
 Here is the decision tree 
 
 <center>
-[![DT](./DecisionTree2.png "DT")]()
+[![DT](./DecisionTree.png "DT")]()
 </center>

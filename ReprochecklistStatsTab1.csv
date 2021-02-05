@@ -1,38 +1,37 @@
 ﻿Hotspot Name,Predicted Species Richness,Number of Species in this study,Percent of Species in BH Not Found in Other BHs,Percentage of Prediction Completed,Number of Total Collections,Median Number of Collections per Species,Standard Deviation of the Average Number of Collections per Species,Pearson’s Moment Coefficient of Skewness
-Atlantic Forest,20000,21640,27.30%,108.20%,849559,10,88.58,6.7
-California Floristic Province,3488,9912,31.70%,284.20%,685293,9,156.25,4.53
-Cape Floristic Region,9000,10158,27.90%,112.90%,235143,10,38.64,4.96
-Caribbean Islands,13000,8950,41.30%,68.80%,166412,6,34.07,4.4
-Caucasus,6400,4797,19.50%,75.00%,72427,6,32.98,17.52
-Cerrado,12070,16250,15.30%,134.60%,465012,6,73.04,7.28
-Chilean Winter Rainfall and Valdivian Forests,3892,4260,49.60%,109.50%,48508,4,23.65,8.36
-Coastal Forests of Eastern Africa,4000,3978,13.40%,99.50%,32191,3,13.22,4.31
-East Melanesian Islands,8000,3188,29.30%,39.90%,35217,4,19.23,4.2
-Eastern Afromontane,7598,10655,35.80%,140.20%,155197,5,25.36,4.74
-Forests of East Australia,8257,9082,39.90%,110.00%,788679,32,134.85,3.33
-Guinean Forests of West Africa,9000,7312,45.30%,81.20%,187447,10,39.87,3.65
-Himalaya,10000,8989,21.00%,89.90%,115008,5,23.41,5.59
-Horn of Africa,5000,3301,30.00%,66.00%,21798,3,9.24,3.17
-Indo-Burma,13500,16777,36.60%,124.30%,298614,6,33.17,4.67
-Irano-Anatolian,6000,5293,30.70%,88.20%,29436,3,9.52,9.54
-Japan,5600,5906,26.00%,105.50%,1245830,33.5,436.62,5.03
-Madagascar and the Indian Ocean Islands,13000,11039,71.30%,84.90%,289535,10,48.06,5.69
-Madrean Pine-Oak Woodlands,5300,16875,14.10%,318.40%,603130,8,112.66,30.89
-Maputaland-Pondoland-Albany,8100,8849,28.60%,109.20%,192774,8,35.65,4.23
-Mediterranean Basin,22500,14829,52.20%,65.90%,1418332,12,223.95,4.57
-Mesoamerica,17000,26957,24.90%,158.60%,2256398,17,218.55,18.38
-Mountains of Central Asia,5500,3353,45.90%,61.00%,22759,3,14.44,20.22
-Mountains of Southwest China,12000,10893,29.50%,90.80%,311949,8,56,5.25
-New Caledonia,3270,3027,49.90%,92.60%,79740,10,46.37,4.48
-New Zealand,2300,6864,20.30%,298.40%,222215,6,68.89,5.85
-North American Coastal Plain,6200,11140,22.30%,179.70%,315388,6,56.39,6.38
-Philippines,9253,4835,30.90%,52.30%,40075,3,14.28,5.38
-Polynesia-Micronesia,5330,5287,29.60%,99.20%,55561,4,22.12,9.46
-Southwest Australia,5571,6577,64.00%,118.10%,492651,36,110.9,3.49
-Succulent Karoo,6356,6785,17.30%,106.70%,63539,4,15.15,4.84
-Sundaland,25000,13008,46.70%,52.00%,305626,6,50.53,6.61
-Tropical Andes,30000,34794,51.10%,116%,914425,6,64.63,8.53
-Tumbes-Choco-Magdalena,11000,11339,5.80%,103.10%,139870,4,21.66,4.86
-Wallacea,10000,5530,21.60%,55.30%,53867,4,16.38,4.54
-Western Ghats and Sri Lanka,5916,2277,28.70%,38.50%,7568,2,4.06,4.51
-,,,,,,,,
+Atlantic Forest,20000,21682,27.4,108.41,1405493,10,3705.35,3705.35
+California Floristic Province,3488,10128,31.2,290.37,865755,11,272.22,272.22
+Cape Floristic Region,9000,10173,27.9,113.03,260731,10,251.06,251.06
+Caribbean Islands,13000,8994,41.2,69.18,183158,6,103.35,103.35
+Caucasus,6400,4804,19.3,75.06,83178,6,117.94,117.94
+Cerrado,12070,16221,15.4,134.39,759156,6,2419.58,2419.58
+Chilean Winter Rainfall and Valdivian Forests,3892,4261,49.3,109.48,53685,4,85.01,85.01
+Coastal Forests of Eastern Africa,4000,3990,13.4,99.75,36339,3,60.77,60.77
+East Melanesian Islands,8000,3199,29.2,39.99,49775,4,255.15,255.15
+Eastern Afromontane,7598,10656,35.7,140.25,164304,5,146.74,146.74
+Forests of East Australia,8257,9129,39.7,110.56,830186,32,377.77,377.77
+Guinean Forests of West Africa,9000,7329,45.3,81.43,203767,10,176.67,176.67
+Himalaya,10000,8968,20.9,89.68,125728,5,118.1,118.1
+Horn of Africa,5000,3304,30,66.08,24931,3,53.77,53.77
+Indo-Burma,13500,16851,36.7,124.82,369851,6,497.6,497.6
+Irano-Anatolian,6000,5271,30.4,87.85,36513,3,84.13,84.13
+Japan,5600,5902,25.7,105.39,1263447,34,496.72,496.72
+Madagascar and the Indian Ocean Islands,13000,11016,71.3,84.74,372883,10,790.13,790.13
+Madrean Pine-Oak Woodlands,5300,17054,13.9,321.77,684639,9,310.42,310.42
+Maputaland-Pondoland-Albany,8100,8899,28.5,109.86,240078,8,445.04,445.04
+Mediterranean Basin,22500,14874,52.1,66.11,1553577,12,697.26,697.26
+Mesoamerica,17000,27007,24.8,158.86,2466284,17,1149.8,1149.8
+Mountains of Central Asia,5500,3353,45.7,60.96,26327,3,61.17,61.17
+Mountains of Southwest China,12000,10899,29.3,90.83,335442,8,232.01,232.01
+New Caledonia,3270,3090,49,94.5,100647,10,306.45,306.45
+New Zealand,2300,7195,19.4,312.83,243673,6,183.49,183.49
+North American Coastal Plain,6200,11416,21.7,184.13,353054,6,116.76,116.76
+Philippines,9253,4790,30,51.77,57550,4,253.36,253.36
+Polynesia-Micronesia,5330,5326,29.6,99.92,62487,4,72.95,72.95
+Southwest Australia,5571,6584,63.8,118.18,542706,36,620.41,620.41
+Succulent Karoo,6356,6809,17.2,107.13,72178,4,101.41,101.41
+Sundaland,25000,13019,46.7,52.08,376445,6,601.11,601.11
+Tropical Andes,30000,34807,51,116.02,1249030,6,1711.25,1711.25
+Tumbes-Choco-Magdalena,11000,11392,5.9,103.56,171594,4,287.1,287.1
+Wallacea,10000,5470,21.8,54.7,73078,4,242.45,242.45
+Western Ghats and Sri Lanka,5916,2249,29,38.02,9333,2,40.35,40.35
