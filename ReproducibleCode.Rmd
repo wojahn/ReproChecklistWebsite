@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:
 
-[Click Here to See GBIF Data](https://doi.org/10.15468/dl.b3bvpw)
+[Click Here to See GBIF Data](https://doi.org/10.15468/dl.xfcbqv)
 
 All of the data we produced can be downloaded from the folder in the link below:
 
