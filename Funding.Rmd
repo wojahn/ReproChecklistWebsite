@@ -7,7 +7,7 @@ output:
   bookdown::html_document2: 
     toc: TRUE
     toc_float: TRUE
-    theme: flatly
+    theme: cerulean
 link-citations: yes
 fontsize: 12pt
 urlcolor: blue
