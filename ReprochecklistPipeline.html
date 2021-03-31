@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki" />
+
+
+<title>Reprochecklist Pipeline</title>
+
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+/* A workaround for https://github.com/jgm/pandoc/issues/4278 */
+a.sourceLine {
+  pointer-events: auto;
+}
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link rel="stylesheet" href="ReprochecklistPipeline_files/style.css" type="text/css" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<section class="page-header">
+<h1 class="title toc-ignore project-name">Reprochecklist Pipeline</h1>
+<h4 class="author project-author">J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki</h4>
+<h4 class="date project-date">15/January/2021</h4>
+</section>
+
+
+
+<section class="main-content">
+<center>
+<a href=""><img src="ReprochecklistLogo.jpg" title="MLogo" alt="MLogo" /></a>
+</center>
+<div id="licensing" class="section level1">
+<h1>Licensing</h1>
+This work is licensed under the GNU Affero General Public License (GNU AGPL) version 3. The text of this license can be found by clicking the logo below.
+<center>
+<a href="https://www.gnu.org/licenses/agpl-3.0.en.html"><img src="100px-AGPLv3_Logo.svg.png" title="Logo" alt="Logo" /></a>
+</center>
+</div>
+<div id="data-availability" class="section level1">
+<h1>Data Availability</h1>
+<p>The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:</p>
+<p><a href="https://doi.org/10.15468/dl.b3bvpw">Click Here to See GBIF Data</a></p>
+<p>All of the data we produced can be downloaded from the folder in the link below:</p>
+<p><a href="https://drive.google.com/drive/folders/1hFFJV7yO2gc8GyYsffFSttXXI2p8iMmi?usp=sharing">Click Here to See Data</a></p>
+</div>
+<div id="package-availability" class="section level1">
+<h1>Package Availability</h1>
+<p>You can download the <em>Reprochecklist</em> package from GitHub using the install_github package from devtools</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;wojahn/Reprochecklist&quot;</span>)</span></code></pre></div>
+</div>
+<div id="preprocess-raw-gbif-file-into-smaller-files" class="section level1">
+<h1>Preprocess raw GBIF file into smaller files</h1>
+<p>After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make intermediate</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 1,6,9,10,22,23,33,41,45 8September2020GBIFTracheophyta.csv &gt; 8Sep2020GBIFSmall.tab&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># Move original to external drive or delete it to conserve memory</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Cut out GBIF IDs</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 1 8Sep2020GBIFSmall.tab &gt; gbifID.tab&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Cut out classes</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 2 8Sep2020GBIFSmall.tab &gt; class.tab&quot;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Cut out genera</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 3 8Sep2020GBIFSmall.tab &gt; genus.tab&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Cut out species</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 4 8Sep2020GBIFSmall.tab &gt; species.tab&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># Cut out latitude</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 5 8Sep2020GBIFSmall.tab &gt; dLat.tab&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Cut out longitude</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 6 8Sep2020GBIFSmall.tab &gt; dLong.tab&quot;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># Cut out year</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 7 8Sep2020GBIFSmall.tab &gt; year.tab&quot;</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Cut out ider name</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 8 8Sep2020GBIFSmall.tab &gt; IDdBy.tab&quot;</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Cut out recorder name</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 9 8Sep2020GBIFSmall.tab &gt; RecrdedBy.tab&quot;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co"># Cut out GBIF ID and year combo</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 1,7 8Sep2020GBIFSmall.tab &gt; gbifYearandID.tab&quot;</span>)</span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Cut out GBIF ID and species combo</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">system</span>(<span class="st">&quot;cut  -f 1,4 8Sep2020GBIFSmall.tab &gt; IDandSpp.tab&quot;</span>)</span></code></pre></div>
+</div>
+<div id="inferring-raw-hotspot-species-list" class="section level1">
+<h1>Inferring raw hotspot species list</h1>
+<p>We downloaded occurrence data for Tracheophytes (vascular plants) with physical specimens from GBIF on 8 September 2020 (GBIF, 2020). A database of species occurring in the 36 BHs was inferred by the function HotspotOverlappeR using overlapping points derived from GBIF GPS data with shapefiles of the 36 hotspots (CEPF, 2016). The names of the hotspot(s) in which each taxon occurred were also recorded by the function. HotspotOverlappeR used maptools (Bivand et al., 2019) and sp (Pebesma et al., 2005).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Read in coordinate data, GBIF IDs, and species</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>GBIFlat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;dLat.tab&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>GBIFlong &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;dLong.tab&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>GBIFidspp &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;IDandSpp.tab&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>) <span class="co">#bc spp sometimes has tabs between them</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Make file for overlapping</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>ForOverlapping &lt;-<span class="st"> </span><span class="kw">data.frame</span>(GBIFidspp,GBIFlat,GBIFlong)</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Destroy old variables to conserve RAM</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">rm</span>(<span class="kw">c</span>(GBIFidspp,GBIFlat,GBIFlong))</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">gc</span>()</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># Overlap with hotspots shapefile</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>HotspotsSpp &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">HotspotOverlappeR</span>(ForOverlapping)</span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">write.csv</span>(HotspotsSpp,<span class="st">&quot;HotspotSpp.csv&quot;</span>,<span class="dt">row.names=</span>F)</span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Restrict to only species in hotspots</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>TrueHotspotSpp &lt;-<span class="st"> </span>HotspotsSpp[<span class="op">!</span><span class="kw">is.na</span>(HotspotsSpp<span class="op">$</span>InHotspot),]</span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="kw">write.csv</span>(TrueHotspotSpp,<span class="st">&quot;TrueHotspotSpp.csv&quot;</span>,<span class="dt">row.names=</span>F)</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co"># Remove old variables to conserve memory</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="kw">rm</span>(HotspotsSpp)</span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="kw">gc</span>()</span></code></pre></div>
+</div>
+<div id="curate-taxonomy" class="section level1">
+<h1>Curate taxonomy</h1>
+<p>This database was then taxonomically curated using the TPL_Synonym_CheckeR, WFO_Synonym_CheckR and TaxonomyHarmonizeR functions from our package Geochecklist. Taxonomical curation prioritized the nomenclature of the more recently updated World Flora Online (WFO, 2020) while using the more comprehensive (but older) The Plant List (TPL, 2013) for taxa not in the WFO.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Make unique list of all species-level occurrences</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>UniqueHSpp &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">as.vector</span>(TrueHotspotSpp<span class="op">$</span>Species))</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># Remove non-BH occurrences</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>UniqueHSpp &lt;-<span class="st"> </span>UniqueHSpp[<span class="op">!</span>UniqueHSpp <span class="op">==</span><span class="st"> &quot;&quot;</span>]</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Compare taxonomy with The Plant List</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>TPL_Curated &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">TPL_Synonym_CheckeR</span>(<span class="kw">as.character</span>(UniqueHSpp))</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">write.csv</span>(TPL_Curated,<span class="st">&quot;TPL_Curated.csv&quot;</span>,<span class="dt">row.names =</span> F)</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># Compare taxonomy with World Flora Online</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>WF_Curated &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">WFO_Synonym_CheckeR</span>(<span class="kw">as.character</span>(UniqueHSpp))</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">write.csv</span>(WF_Curated,<span class="st">&quot;WF_Curated.csv&quot;</span>,<span class="dt">row.names =</span> F)</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co"># Harmonize taxonomy between TPL and WFO, prioritizing WFO</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>CuratedHSpp &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">TaxonomyHarmonizeR</span>(TPL_Curated, WF_Curated, UniqueHSpp)</span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">write.csv</span>(CuratedHSpp,<span class="st">&quot;CuratedHSpp.csv&quot;</span>,<span class="dt">row.names =</span> F)</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co"># Now apply this harmonized taxonomical framework to GBIF species</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>UpdatedGBIFHSpp &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">GBIFTaxonomicalHarmonizeR</span>(TrueHotspotSpp,CuratedHSpp)</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co"># Update column name</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">colnames</span>(UpdatedGBIFHSpp)[<span class="dv">6</span>] &lt;-<span class="st"> &quot;GBIF_ID&quot;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="kw">write.csv</span>(UpdatedGBIFHSpp,<span class="st">&quot;UpdatedGBIFHSpp.csv&quot;</span>,<span class="dt">row.names=</span>F)</span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co"># Remove occurrences with empty taxonomical information</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a> Reprochecklist &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(UpdatedGBIFHSpp[<span class="op">!</span>UpdatedGBIFHSpp<span class="op">$</span>Species <span class="op">==</span><span class="st"> &quot;&quot;</span>,])</span>
+<span id="cb4-21"><a href="#cb4-21"></a> <span class="kw">write.csv</span>(Reprochecklist,<span class="st">&quot;Reprochecklist.csv&quot;</span>,<span class="dt">row.names=</span>F)</span></code></pre></div>
+</div>
+<div id="calculate-number-of-collections-per-species-number-of-collections-total-and-skewness-statisitics" class="section level1">
+<h1>Calculate number of collections per species, number of collections total, and skewness statisitics</h1>
+<p>The number of species in each BH was inferred using the function HotspotSpeciesCounteR using the outputs of HotspotOverlappeR and TaxonomyHarmonizeR. It also inferred the number of total collections per hotspot, the median number of collections per species in each hotspot, the standard deviation of the number of collections per species in each hotspot, and the Pearson’s moment coefficient of skewness of the number of collections per species in each hotspot. It used EnvStats internally (Millard, 2013).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Infer taxonomical information for BHs</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>out &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">HotspotSpeciesCounteR</span>(UpdatedGBIFHSpp)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">write.csv</span>(out,<span class="st">&quot;HotspotSppInfo26Sep2020.csv&quot;</span>,<span class="dt">row.names=</span>F)</span></code></pre></div>
+</div>
+<div id="extract-year-of-description-using-ipni" class="section level1">
+<h1>Extract year of description using IPNI</h1>
+<p>Next we extracted the dates of description for each of the species in the curated list as well as for names that were eliminated during curation was done using the function IPNI_Description_Date_GetteR. This function used taxize (Chamberlain et al., 2013) internally. If a taxon in the curated list was not in IPNI but its synonym was, then its synonym’s date of description was used as its date of description. If multiple dates were returned the earliest date was used as the date of description. This process was done by the functions IPNITaxonomyHarmonizeR and IPNICleaneR in our package.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Make unique vector of all hotspot species</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>AllHSpp &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">as.vector</span>(<span class="kw">c</span>(<span class="kw">as.character</span>(CuratedHSpp<span class="op">$</span>AcceptedName),<span class="kw">as.character</span>(CuratedHSpp<span class="op">$</span>OldName))))</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># Set entrez key (this one is depreciated, use your personal key)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>rentrez<span class="op">::</span><span class="kw">set_entrez_key</span>(<span class="st">&quot;b81698f0c342bc2bfb00b25999f21be50d08&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Get description dates</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>IPNIyears &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">IPNI_Description_Date_GetteR</span>(<span class="kw">as.character</span>(AllHSpp))</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">write.csv</span>(IPNIyears,<span class="st">&quot;IPNIyears.csv&quot;</span>,<span class="dt">row.names=</span>F)</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># Harmonize IPNI taxonomy with curated list</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>FinalIPNI &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">IPNITaxonomyHarmonizeR</span>(IPNIyears,CuratedHSpp)</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="kw">write.csv</span>(FinalIPNI,<span class="st">&quot;FinalIPNI.csv&quot;</span>, <span class="dt">row.names=</span>F)</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># Do some stats</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="kw">length</span>(<span class="kw">which</span>(FinalIPNI<span class="op">$</span>DescriptionYear <span class="op">==</span><span class="st"> &quot;NOT_IN_IPNI&quot;</span>))</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># 30986 not in IPNI</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>UniqueAccepteds &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">as.vector</span>(CuratedHSpp<span class="op">$</span>AcceptedName))</span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="kw">length</span>(UniqueAccepteds)</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># 189491 total accepted names</span></span></code></pre></div>
+</div>
+<div id="make-collection-and-description-yearly-curves" class="section level1">
+<h1>Make collection and description yearly curves</h1>
+<p>Then we analysed the GBIF collection year data for all of the hotspot species by constructing curves illustrating the number of collections per year. The same process was done for the IPNI year-of-description data, where the curve showed the number of descriptions per year. The function YearlyCollectionDescriptionPlotsMakeR performed this analysis for the overall data and coplotted the 2 resultant curves. Regressions were run on the collection and description data from 2009 to 2020 for collections and descriptions using RegressionPerformeR.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Set output directory if want it to be different than pwd</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>OutDirectory &lt;-<span class="st"> </span><span class="kw">getwd</span>()</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># Make yearly collection and description curves along with genus-only collection curve</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>Reprochecklist<span class="op">::</span><span class="kw">YearlyCollectionDescriptionCurvesMakeR</span>(TrueHotspotSpp,GBIFid,FinalIPNI,OutDirectory)</span></code></pre></div>
+<p>Here are the yearly collection and description curves (blue is collection, orange is description, dotted is genus-only collections):</p>
+<center>
+<a href=""><img src="OverallYearlyCollectionDescriptionCurves.jpg" title="CDC" alt="CDC" /></a>
+</center>
+</div>
+<div id="make-hotspotwise-heatmaps" class="section level1">
+<h1>Make hotspotwise heatmaps</h1>
+<p>Heatmaps of collection activity and description activity were generated using HeatmapMakeR. This function used gplots (Gregory et al., 2020) internally to create the heatmap and perform the clustering analyses. Labels were colored using visual inspection of clusters. Colrownumz and Descrownumz can be added to add group prefixes to the graph. They have the same order as would unique(UpdatedGBIFHSpp$HotspotName) as their first column and the group membership as a number in the second column.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Preprocess IPNI results</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>IPNIReady &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">IPNIReadieR</span>(FinalIPNI)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">write.csv</span>(IPNIReady,<span class="st">&quot;IPNIReady.csv&quot;</span>,<span class="dt">row.names=</span>F)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># For first time set to null then add cluster order if desired</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>Colrownumz &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>Descrownumz &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Set output directory if want it to be different than pwd</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>OutDirectory &lt;-<span class="st"> </span><span class="kw">getwd</span>()</span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co"># Make collection and description heatmaps</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>Reprochecklist<span class="op">::</span><span class="kw">HeatmapMakeR</span>(IPNIReady,UpdatedGBIFHSpp,OutDirectory,Colrownumz,Descrownumz)</span></code></pre></div>
+<p>Here is the collections heatmap:</p>
+<center>
+<a href=""><img src="./CollectionHeatmap.jpg" title="ColBH" alt="ColBH" /></a>
+</center>
+<p>Here is the description heatmap:</p>
+<center>
+<a href=""><img src="./DescHM.jpg" title="DescBH" alt="DescBH" /></a>
+</center>
+</div>
+<div id="perform-decision-tree-analysis" class="section level1">
+<h1>Perform decision tree analysis</h1>
+<p>In order to calculate the levels of the Linnaean and Wallacean shortfalls for each GSB vascular plant species in each BH by running their Reprochecklist occurrences through a decision tree analysis that assigned to them a four levels of uncertainty associated with the Linnaean and Wallacean shortfall using the functions EOO_AOO_AnalyzeR and DecisionTreeMakeR (Fig. 1). The first part of the alarm code gives the decision tree’s assessment of its distribution (either UN for “unknown”, PK for “poorly known”, N for “narrow”, or W for “wide”), the second gives the width of the Linnaean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”), and the third gives the width of the Wallacean shortfall in the form of an alarm code (either G for “green”, O for “orange”, or R for “red”). This first decision of the tree first separated off those species that had only 1 GSB collection associated to them and scored them as UN;RR since their distribution/species delimitation cannot be inferred from a single occurrence (Fig. 1). This is equivalent to the IUCN data deficient category. The second decision was whether or not the EOO of the species fulfilled the minimum set by the user (grid size of 10km (100 km2) in our case). If it was smaller than the minimum area, we then made decision number 3.1 and examined the number of collections total and compared them to the minimum number of collections (also settable by the user, we chose 5). If there were fewer than the minimum number of collections, then the species was assigned as PK;OR (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and red for the Wallacean shortfall since it was poorly sampled in only a single place; Fig. 1). If there were more than the minimum number of collections, then the species was assigned as PK;OO (orange for the Linnean shortfall since it had more than five samples which allows for at least some phylogenetic analyses to be performed and orange for the Wallacean shortfall since though it was only in a single place it was not poorly sampled; Fig. 1). EOO_AOO_AnalyzeR used raster (Hijmans, 2020) and ConR (Dauby, 2020) internally to calculate EOO and AOO. Going back to the second decision, if the EOO of the species fulfilled the minimum set by the user then we made decision number 3.2, where we determined whether or not the species’ distribution was wide or narrow. This was done by determining if the species’ AOO was less than 20% of its EOO (REF; Fig. 1). If it was, then the species was determined to be widespread, if no then it was determined to be narrowly spread. It is important to note that the decisions made after decision 3.2 were the same for each species regardless of its answer to previous questions. Next, then mean number of collections per 100 km2 cell of a species’ AOO was determined so as to grade the Wallacean shortfall of those species. If there were more than the minimum set by the user (we chose 5) then the species was graded as Wallacean green, if there were fewer than 5 it was graded as red. Finally, the average distance between samples was calculated so as to assess the Linnaean shortfall through analysing the possible circumscription of a species. If the average distance between samples was above the maximum set by the user (10 km in our case) then the species was graded as Linnaean orange or red, depending on the number of samples per cell (orange if above the minimum average collections per cell so as to account for possibly disjunct species distributions, red if below the minimum average collections per cell since whether or not a species is disjunct would require more sampling).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#Perform EOO and AOO analyses for each species for each BH</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>combo &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">EOO_AOO_AnalyzeR</span>(Reprochecklist,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                                          <span class="dt">MinArea =</span> <span class="dv">100</span>,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                                          <span class="dt">MinColl =</span> <span class="dv">5</span>, </span>
+<span id="cb9-5"><a href="#cb9-5"></a>                                          <span class="dt">AEp =</span> <span class="fl">0.2</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>                                          <span class="dt">CellDistThresh =</span> <span class="dv">10</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>                                          <span class="dt">samplesize =</span> <span class="dv">500</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#Construct the decision tree proper</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>Tree &lt;-<span class="st"> </span>Reprochecklist<span class="op">::</span><span class="kw">DecisionTreeMakeR</span>(combo)</span></code></pre></div>
+</div>
+<div id="here-is-the-decision-tree" class="section level1">
+<h1>Here is the decision tree:</h1>
+<center>
+<a href=""><img src="./DecisionTree2.png" title="DT" alt="DT" /></a>
+</center>
+</div>
+<div id="thank-you" class="section level1">
+<h1>Thank you!</h1>
+<div id="wojahn-forest-callmander-and-buerki" class="section level2">
+<h2>© 2021 Wojahn, Forest, Callmander, and Buerki</h2>
+</div>
+</div>
+</section>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

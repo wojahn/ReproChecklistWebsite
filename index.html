@@ -11,13 +11,13 @@
 
 <meta name="author" content="J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki" />
 
-<meta name="date" content="2021-02-05" />
+<meta name="date" content="2021-03-31" />
 
 <title>Reprochecklist</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -117,33 +117,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 60px;
+  padding-top: 51px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .dropdown-submenu {
   position: relative;
@@ -355,27 +355,12 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Reprochecklist</a>
+      <a class="navbar-brand" href="index.html">ReproChecklist</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="ReproducibleCode.html">Reproducible Pipeline</a>
-</li>
-<li>
-  <a href="Figures.html">Analysis Figures</a>
-</li>
-<li>
-  <a href="Tables.html">Analysis Tables</a>
-</li>
-<li>
-  <a href="Lexicon.html">Download the Reprochecklist</a>
-</li>
-<li>
-  <a href="References.html">References</a>
+  <a href="index.html">Pipeline</a>
 </li>
 <li>
   <a href="Funding.html">Funding</a>
@@ -397,7 +382,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Reprochecklist</h1>
 <h4 class="author">J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki</h4>
-<h4 class="date">2021-02-05</h4>
+<h4 class="date">2021-03-31</h4>
 
 </div>
 
@@ -408,99 +393,176 @@ $(document).ready(function() {
   $('#header').css('margin-right', '120px')
 });
 </script>
-<div id="overview" class="section level1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<div id="research-questions" class="section level2">
-<h2><span class="header-section-number">1.1</span> Research Questions</h2>
-<ol style="list-style-type: decimal">
-<li>How many species of vascular plants occur in the 36 BHs and has our knowledge of their distribution been impacted by the decline of GSB observations?</li>
-<li>How far are we from completing the description of the BH vascular flora and testing the taxonomy (Linnaean shortfall) and distribution (Wallacean shortfall) of currently-known species?</li>
-</ol>
+<div id="data-availability" class="section level1">
+<h1><span class="header-section-number">1</span> Data Availability</h1>
+<p>The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:</p>
+<p><a href="https://doi.org/10.15468/dl.b3bvpw">Click Here to See GBIF Data</a></p>
+<p>The 2021 ReproChecklist can be downloaded in the link below:</p>
+<p><a href="10.6084/m9.figshare.13720318">Click Here to Get 2021 ReproChecklist</a></p>
+<p>A folder of intermediate files can be downloaded in the link below:</p>
+<p><a href="https://drive.google.com/drive/folders/1pIzb27PKIq0_iA2Lz0p7vjTvPWISEkXQ?usp=sharing">Click Here to Get Intermediate Data</a></p>
 </div>
-<div id="overview-of-our-reprochecklist-analysis" class="section level2">
-<h2><span class="header-section-number">1.2</span> Overview of our Reprochecklist analysis</h2>
-<p>To answer our first research question, we created a taxonomically curated database of GSB vascular plant species occurrences in BHs (i.e. the Reprochecklist). We then used this database to infer trends of BH GSB vascular plant species collection and description between BHs and for the BH system as a whole. These trends were visualized as heatmaps (with each BH as a separate row) that were used to analyse differences in collection and description effort between BHs and as rate curves to assess the collection and description trends for the BH system as a whole.
-To answer our second research question, we used a decision tree analysis that assigned to each BH GSB vascular plant taxon one of four levels of uncertainty associated with the Linnaean and Wallacean shortfalls (see Fig. 1 for a flow-chart illustrating the decisions that lead to each of the levels of uncertainty). Decisions were based on the number of collections total, the area of a taxon’s EOO, the area of a taxon’s AOO relative to its EOO, the mean number of collections in a 100 km2 cell, and the mean distance between contiguous groups of occupied 100km2 cells. The percent of species falling into each level of uncertainty was then assessed. This process was conducted for all GSB vascular plant species in the BH system as a whole and also individually just for the GSB vascular plant species in each BH.</p>
+<div id="package-availability" class="section level1">
+<h1><span class="header-section-number">2</span> Package Availability</h1>
+<p>You can download the <em>ReproChecklist</em> package from GitHub using the install_github package from devtools</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;wojahn/ReproChecklist&quot;)</code></pre>
+</div>
+<div id="preprocess-raw-gbif-file-into-smaller-files" class="section level1">
+<h1><span class="header-section-number">3</span> Preprocess raw GBIF file into smaller files</h1>
+<p>After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM</p>
+<pre class="r"><code># Make intermediate
+#Make intermediate
+system(&quot;cut  -f 1,6,9,10,22,23,33,41,45 0160938-200613084148143.csv &gt; GBIF_Traceophyta_2021Small.tab&quot;)
+#Move original to external drive or delete it to conserve memory
+#From intermediate make singles
+system(&quot;cut  -f 1 GBIF_Traceophyta_2021Small.tab &gt; gbifID.tab&quot;)
+system(&quot;cut  -f 2 GBIF_Traceophyta_2021Small.tab &gt; class.tab&quot;)
+system(&quot;cut  -f 3 GBIF_Traceophyta_2021Small.tab &gt; genus.tab&quot;)
+system(&quot;cut  -f 4 GBIF_Traceophyta_2021Small.tab &gt; species.tab&quot;)
+system(&quot;cut  -f 5 GBIF_Traceophyta_2021Small.tab &gt; dLat.tab&quot;)
+system(&quot;cut  -f 6 GBIF_Traceophyta_2021Small.tab &gt; dLong.tab&quot;)
+system(&quot;cut  -f 7 GBIF_Traceophyta_2021Small.tab &gt; year.tab&quot;)
+system(&quot;cut  -f 8 GBIF_Traceophyta_2021Small.tab &gt; IDdBy.tab&quot;)
+system(&quot;cut  -f 9 GBIF_Traceophyta_2021Small.tab &gt; RecrdedBy.tab&quot;)
+system(&quot;cut  -f 1,7 GBIF_Traceophyta_2021Small.tab &gt; gbifYearandID.tab&quot;)
+system(&quot;cut  -f 1,4 GBIF_Traceophyta_2021Small.tab &gt; IDandSpp.tab&quot;)
+system(&quot;cut  -f 1,46 0160938-200613084148143.csv &gt; IDandType.tab&quot;)</code></pre>
+</div>
+<div id="inferring-raw-hotspot-species-list" class="section level1">
+<h1><span class="header-section-number">4</span> Inferring raw hotspot species list</h1>
+<p>We downloaded occurrence data for Tracheophytes (vascular plants) with physical specimens from GBIF on 8 September 2020 (GBIF, 2020). A database of species occurring in the 36 BHs was inferred by the function HotspotOverlappeR using overlapping points derived from GBIF GPS data with shapefiles of the 36 hotspots (CEPF, 2016). The names of the hotspot(s) in which each taxon occurred were also recorded by the function. HotspotOverlappeR used maptools (Bivand et al., 2019) and sp (Pebesma et al., 2005).</p>
+<pre class="r"><code># Read in coordinate data, GBIF IDs, and species
+GBIFlat &lt;- read.delim(&quot;dLat.tab&quot;, sep = &quot;\t&quot;)
+GBIFlong &lt;- read.delim(&quot;dLong.tab&quot;, sep = &quot;\t&quot;)
+GBIFidspp &lt;- read.delim(&quot;IDandSpp.tab&quot;,sep=&quot;\t&quot;) #bc spp sometimes has tabs between them
+# Make file for overlapping
+ForOverlapping &lt;- data.frame(GBIFidspp,GBIFlat,GBIFlong)
+# Destroy old variables to conserve RAM
+rm(c(GBIFidspp,GBIFlat,GBIFlong))
+gc()
+# Overlap with hotspots shapefile
+HotspotsSpp &lt;- ReproChecklist::HotspotOverlappeR(ForOverlapping)
+write.csv(HotspotsSpp,&quot;HotspotSpp.csv&quot;,row.names=F)
+# Restrict to only species in hotspots
+TrueHotspotSpp &lt;- HotspotsSpp[!is.na(HotspotsSpp$InHotspot),]
+write.csv(TrueHotspotSpp,&quot;TrueHotspotSpp.csv&quot;,row.names=F)
+# Remove old variables to conserve memory
+rm(HotspotsSpp)
+gc()</code></pre>
+</div>
+<div id="curate-taxonomy" class="section level1">
+<h1><span class="header-section-number">5</span> Curate taxonomy</h1>
+<p>This database was then taxonomically curated using the TPL_Synonym_CheckeR, WFO_Synonym_CheckR and TaxonomyHarmonizeR functions from our package Geochecklist. Taxonomical curation prioritized the nomenclature of the more recently updated World Flora Online (WFO, 2020) while using the more comprehensive (but older) The Plant List (TPL, 2013) for taxa not in the WFO.</p>
+<pre class="r"><code># Make unique list of all species-level occurrences
+UniqueHSpp &lt;- unique(as.vector(TrueHotspotSpp$Species))
+# Remove non-BH occurrences
+UniqueHSpp &lt;- UniqueHSpp[!UniqueHSpp == &quot;&quot;]
+# Compare taxonomy with The Plant List
+TPL_Curated &lt;- ReproChecklist::TPL_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(TPL_Curated,&quot;TPL_Curated.csv&quot;,row.names = F)
+# Compare taxonomy with World Flora Online
+WF_Curated &lt;- ReproChecklist::WFO_Synonym_CheckeR(as.character(UniqueHSpp))
+write.csv(WF_Curated,&quot;WF_Curated.csv&quot;,row.names = F)
+# Harmonize taxonomy between TPL and WFO, prioritizing WFO
+CuratedHSpp &lt;- ReproChecklist::TaxonomyHarmonizeR(TPL_Curated, WF_Curated, UniqueHSpp)
+write.csv(CuratedHSpp,&quot;CuratedHSpp.csv&quot;,row.names = F)
+# Now apply this harmonized taxonomical framework to GBIF species
+UpdatedGBIFHSpp &lt;- ReproChecklist::GBIFTaxonomicalHarmonizeR(TrueHotspotSpp,CuratedHSpp)
+# Update column name
+colnames(UpdatedGBIFHSpp)[6] &lt;- &quot;GBIF_ID&quot;
+write.csv(UpdatedGBIFHSpp,&quot;UpdatedGBIFHSpp.csv&quot;,row.names=F)
+# Remove occurrences with empty taxonomical information
+ ReproChecklist &lt;- as.data.frame(UpdatedGBIFHSpp[!UpdatedGBIFHSpp$Species == &quot;&quot;,])
+ write.csv(ReproChecklist,&quot;ReproChecklist.csv&quot;,row.names=F)</code></pre>
+</div>
+<div id="calculate-number-of-collections-per-species-number-of-collections-total-and-skewness-statisitics-as-well-as-number-of-species-unique-to-each-hotspot" class="section level1">
+<h1><span class="header-section-number">6</span> Calculate number of collections per species, number of collections total, and skewness statisitics as well as number of species unique to each hotspot</h1>
+<p>The number of species in each BH was inferred using the function HotspotSpeciesCounteR using the outputs of HotspotOverlappeR and TaxonomyHarmonizeR. It also inferred the number of total collections per hotspot, the median number of collections per species in each hotspot, the standard deviation of the number of collections per species in each hotspot, and the Pearson’s moment coefficient of skewness of the number of collections per species in each hotspot. It used EnvStats internally (Millard, 2013). The percent of species unique to each hotspot was calculated by SharedSpeciesInferreR.</p>
+<pre class="r"><code>out &lt;- ReproChecklist::HotspotSpeciesCounteR(ReproChecklist)
+write.csv(out,&quot;HotspotSppInfo.csv&quot;,row.names=F)
+SharedSpecies &lt;- ReproChecklist::SharedSpeciesInferreR(ReproChecklist)
+write.csv(SharedSpecies,&quot;SharedSpecies.csv&quot;,row.names=F)</code></pre>
+</div>
+<div id="extract-year-of-description-using-ipni" class="section level1">
+<h1><span class="header-section-number">7</span> Extract year of description using IPNI</h1>
+<p>Next we extracted the dates of description for each of the species in the curated list as well as for names that were eliminated during curation was done using the function IPNI_Description_Date_GetteR. This function used taxize (Chamberlain et al., 2013) internally. If a taxon in the curated list was not in IPNI but its synonym was, then its synonym’s date of description was used as its date of description. If multiple dates were returned the earliest date was used as the date of description. This process was done by the functions IPNITaxonomyHarmonizeR and IPNICleaneR in our package.</p>
+<pre class="r"><code># Make unique vector of all hotspot species
+AllHSpp &lt;- unique(as.vector(c(as.character(CuratedHSpp$AcceptedName),as.character(CuratedHSpp$OldName))))
+# Set entrez key (this one is depreciated, use your personal key)
+rentrez::set_entrez_key(&quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;)
+# Get description dates
+IPNIyears &lt;- ReproChecklist::IPNI_Description_Date_GetteR(as.character(AllHSpp))
+write.csv(IPNIyears,&quot;IPNIyears.csv&quot;,row.names=F)
+# Harmonize IPNI taxonomy with curated list
+FinalIPNI &lt;- ReproChecklist::IPNITaxonomyHarmonizeR(IPNIyears,CuratedHSpp)
+write.csv(FinalIPNI,&quot;FinalIPNI.csv&quot;, row.names=F)
+# Do some stats
+length(which(FinalIPNI$DescriptionYear == &quot;NOT_IN_IPNI&quot;))
+UniqueAccepteds &lt;- unique(as.vector(CuratedHSpp$AcceptedName))
+length(UniqueAccepteds)</code></pre>
+</div>
+<div id="make-collection-and-description-yearly-curves" class="section level1">
+<h1><span class="header-section-number">8</span> Make collection and description yearly curves</h1>
+<p>Then we analysed the GBIF collection year data for all of the hotspot species by constructing curves illustrating the number of collections per year. The same process was done for the IPNI year-of-description data, where the curve showed the number of descriptions per year. The function YearlyCollectionDescriptionPlotsMakeR performed this analysis for the overall data and coplotted the 2 resultant curves. Regressions were run on the collection and description data from 2009 to 2020 for collections and descriptions using RegressionPerformeR.</p>
+<pre class="r"><code>#set output directory if want it to be different than pwd
+ID_Year &lt;- read.delim(&quot;gbifYearandID.tab&quot;, sep = &quot;\t&quot;)
+ReproChecklist::YearlyCollectionDescriptionCurvesMakeR(ReproChecklist,FinalIPNI,ID_Year)</code></pre>
+<p>Here are the yearly collection and description curves (blue is collection, orange is description, dotted is genus-only collections):</p>
 <center>
-<a href=""><img src="Flowchart.png" title="ColBH" alt="ColBH" /></a>
+<a href=""><img src="OverallYearlyCollectionDescriptionCurves.jpg" title="CDC" alt="CDC" /></a>
 </center>
 </div>
+<div id="make-hotspotwise-heatmaps" class="section level1">
+<h1><span class="header-section-number">9</span> Make hotspotwise heatmaps</h1>
+<p>Heatmaps of collection activity and description activity were generated using HeatmapMakeR. This function used gplots (Gregory et al., 2020) internally to create the heatmap and perform the clustering analyses. Labels were colored using visual inspection of clusters. Colrownumz and Descrownumz can be added to add group prefixes to the graph. They have the same order as would unique(UpdatedGBIFHSpp$HotspotName) as their first column and the group membership as a number in the second column.</p>
+<pre class="r"><code># Preprocess IPNI results
+IPNIReady &lt;- ReproChecklist::IPNIReadieR(FinalIPNI)
+write.csv(IPNIReady,&quot;IPNIReady.csv&quot;,row.names=F)
+# For first time set to null then add cluster order if desired
+Colrownumz &lt;- NULL
+Descrownumz &lt;- NULL
+# Set output directory if want it to be different than pwd
+OutDirectory &lt;- getwd()
+# Make collection and description heatmaps
+ReproChecklist::HeatmapMakeR(IPNIReady,ReproChecklist,OutDirectory,Colrownumz,Descrownumz, ID_Year = ID_Year))</code></pre>
+<p>Here is the collections heatmap:</p>
+<center>
+<a href=""><img src="CollectionsHM.png" title="ColBH" alt="ColBH" /></a>
+</center>
+<p>Here is the description heatmap:</p>
+<center>
+<a href=""><img src="DescriptionsHM.png" title="DescBH" alt="DescBH" /></a>
+</center>
 </div>
-<div id="installing-reprochecklist" class="section level1">
-<h1><span class="header-section-number">2</span> Installing Reprochecklist</h1>
-<div id="dependencies" class="section level2">
-<h2><span class="header-section-number">2.1</span> Dependencies</h2>
-<p>devtools</p>
-<p>You can find G2PMineR on GitHub at wojahn/Reprochecklist</p>
-<pre class="r"><code># First install devtools
-install.packages(&quot;devtools&quot;)
+<div id="perform-decision-tree-analysis" class="section level1">
+<h1><span class="header-section-number">10</span> Perform decision tree analysis</h1>
+<p>In order to calculate the levels of the Linnaean and Wallacean shortfalls for each GSB vascular plant species in each BH by running their ReproChecklist occurrences through a decision tree analysis.</p>
+<pre class="r"><code>#Perform EOO and AOO analyses for each species for each BH
+combo &lt;- ReproChecklist::EOO_AOO_AnalyzeR(ReproChecklist,
+                                          MinArea = 100,
+                                          MinColl = 5, 
+                                          AEp = 0.2,
+                                          CellDistThresh = 10
+                                          samplesize = 500)
 
-# Then install G2PMineR from GitHub
-devtools::install_github(&quot;wojahn/Reprochecklist&quot;)</code></pre>
+#Construct the decision tree proper
+Tree &lt;- ReproChecklist::DecisionTreeMakeR(combo)
+library(DiagrammeR)
+plot(myproj,layout=&quot;lay&quot;)
+#save as image manually</code></pre>
 </div>
+<div id="here-is-the-decision-tree" class="section level1">
+<h1><span class="header-section-number">11</span> Here is the decision tree:</h1>
+<center>
+<a href=""><img src="DecisionTree.png" title="DT" alt="DT" /></a>
+</center>
 </div>
-<div id="author-contributions" class="section level1">
-<h1><span class="header-section-number">3</span> Author contributions</h1>
-<p>Conceptualization, J.M.A.W. and S.B.; methodology, J.W.A.W.; software, J.M.A.W.; validation, S.J.G., A.E.M., S.B. and J.M.A.W.; formal analysis, J.M.A.W.; investigation, J.M.A.W.; resources, J.M.A.W.; data curation, J.M.A.W.; writing—original draft preparation, J.M.A.W.; writing—review and editing, S.B., A.M., A.E.M., and S.J.G.; visualization, J.M.A.W.; su-pervision, S.B.; project administration, S.B.; funding acquisition, S.B. All authors have read and agreed to the published version of the manuscript.</p>
-<div id="refs">
-
+<div id="thank-you" class="section level1">
+<h1><span class="header-section-number">12</span> Thank you!</h1>
+<div id="wojahn-forest-callmander-and-buerki" class="section level2">
+<h2><span class="header-section-number">12.1</span> © 2021 Wojahn, Forest, Callmander, and Buerki</h2>
 </div>
-</div>
-<div id="appendix-1" class="section level1 appendix">
-<h1><span class="header-section-number">4</span> Appendix 1</h1>
-<p>Citations of all R packages used to generate this report.</p>
-<p>[1] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown: Dynamic
-Documents for R</em>. R package version 2.6. 2020. &lt;URL:
-<a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>&gt;.</p>
-<p>[2] C. Boettiger. <em>knitcitations: Citations for Knitr Markdown Files</em>.
-R package version 1.0.12. 2021. &lt;URL:
-<a href="https://github.com/cboettig/knitcitations" class="uri">https://github.com/cboettig/knitcitations</a>&gt;.</p>
-<p>[3] M. C. Koohafkan. <em>kfigr: Integrated Code Chunk Anchoring and
-Referencing for R Markdown Documents</em>. R package version 1.2. 2015.
-&lt;URL: <a href="https://github.com/mkoohafkan/kfigr" class="uri">https://github.com/mkoohafkan/kfigr</a>&gt;.</p>
-<p>[4] R Core Team. <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
-2020. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
-<p>[5] H. Wickham and J. Bryan. <em>usethis: Automate Package and Project
-Setup</em>. R package version 1.6.3. 2020. &lt;URL:
-<a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>&gt;.</p>
-<p>[6] H. Wickham, R. François, L. Henry, et al. <em>dplyr: A Grammar of
-Data Manipulation</em>. R package version 1.0.2. 2020. &lt;URL:
-<a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>&gt;.</p>
-<p>[7] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
-Developing R Packages Easier</em>. R package version 2.3.2. 2020. &lt;URL:
-<a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a>&gt;.</p>
-<p>[8] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
-Markdown</em>. ISBN 978-1138700109. Boca Raton, Florida: Chapman and
-Hall/CRC, 2016. &lt;URL: <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
-<p>[9] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
-Markdown</em>. R package version 0.21. 2020. &lt;URL:
-<a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
-<p>[10] Y. Xie. <em>Dynamic Documents with R and knitr</em>. 2nd. ISBN
-978-1498716963. Boca Raton, Florida: Chapman and Hall/CRC, 2015. &lt;URL:
-<a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
-<p>[11] Y. Xie. <em>formatR: Format R Code Automatically</em>. R package version
-1.7. 2019. &lt;URL: <a href="https://github.com/yihui/formatR" class="uri">https://github.com/yihui/formatR</a>&gt;.</p>
-<p>[12] Y. Xie. “knitr: A Comprehensive Tool for Reproducible Research in
-R”. In: <em>Implementing Reproducible Computational Research</em>. Ed. by V.
-Stodden, F. Leisch and R. D. Peng. ISBN 978-1466561595. Chapman and
-Hall/CRC, 2014. &lt;URL:
-<a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>&gt;.</p>
-<p>[13] Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>. R package version 1.31. 2021. &lt;URL:
-<a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
-<p>[14] Y. Xie and J. Allaire. <em>tufte: Tufte’s Styles for R Markdown
-Documents</em>. R package version 0.9. 2020. &lt;URL:
-<a href="https://github.com/rstudio/tufte" class="uri">https://github.com/rstudio/tufte</a>&gt;.</p>
-<p>[15] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
-Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
-2018. &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
-<p>[16] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
-9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
-<a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
-<p>[17] H. Zhu. <em>kableExtra: Construct Complex Table with kable and Pipe
-Syntax</em>. R package version 1.3.1. 2020. &lt;URL:
-<a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>&gt;.</p>
 </div>
 
 

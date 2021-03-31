@@ -1,20 +1,10 @@
-name: "Reprochecklist"
+name: "ReproChecklist"
 output_dir: "."
 navbar:
-  title: "Reprochecklist"
+  title: "ReproChecklist"
   left:
-    - text: "Home"
+    - text: "Pipeline"
       href: index.html
-    - text: "Reproducible Pipeline"
-      href: ReproducibleCode.html
-    - text: "Analysis Figures"
-      href: Figures.html
-    - text: "Analysis Tables"
-      href: Tables.html
-    - text: "Download the Reprochecklist"
-      href: Lexicon.html
-    - text: "References"
-      href: References.html
     - text: "Funding"
       href: Funding.html
     - text: "License"
