@@ -54,7 +54,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:
 
-[Click Here to See GBIF Data](https://doi.org/10.15468/dl.b3bvpw)
+[Click Here to See GBIF Data](https://doi.org/10.15468/dl.xfcbqv)
 
 The 2021 ReproChecklist can be downloaded in the link below:
 
