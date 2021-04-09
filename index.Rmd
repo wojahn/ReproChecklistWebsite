@@ -58,7 +58,7 @@ The input data (all tracheophyta restricted to only those with a physical specim
 
 The 2021 ReproChecklist can be downloaded in the link below:
 
-[Click Here to Get 2021 ReproChecklist](10.6084/m9.figshare.13720318)
+[Click Here to Get 2021 ReproChecklist](https://doi.org/10.6084/m9.figshare.13720318)
 
 A folder of intermediate files can be downloaded in the link below:
 
