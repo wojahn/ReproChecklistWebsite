@@ -156,8 +156,15 @@ out <- ReproChecklist::HotspotSpeciesCounteR(ReproChecklist)
 write.csv(out,"HotspotSppInfo.csv",row.names=F)
 SharedSpecies <- ReproChecklist::SharedSpeciesInferreR(ReproChecklist)
 write.csv(SharedSpecies,"SharedSpecies.csv",row.names=F)
+# Make species richness BH world map
+ReproChecklist::SpeciesRichnessMapMakeR()
 ```
 
+Here is the BH species richness map:
+
+<center>
+[![ColBH](./BH_Spp_Richness.png "SppRichBH")]()
+</center>
 
 # Extract year of description using IPNI
 	

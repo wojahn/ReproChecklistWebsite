@@ -11,7 +11,7 @@
 
 <meta name="author" content="J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki" />
 
-<meta name="date" content="2021-04-09" />
+<meta name="date" content="2021-04-26" />
 
 <title>Reprochecklist</title>
 
@@ -382,7 +382,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Reprochecklist</h1>
 <h4 class="author">J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki</h4>
-<h4 class="date">2021-04-09</h4>
+<h4 class="date">2021-04-26</h4>
 
 </div>
 
@@ -482,7 +482,13 @@ write.csv(UpdatedGBIFHSpp,&quot;UpdatedGBIFHSpp.csv&quot;,row.names=F)
 <pre class="r"><code>out &lt;- ReproChecklist::HotspotSpeciesCounteR(ReproChecklist)
 write.csv(out,&quot;HotspotSppInfo.csv&quot;,row.names=F)
 SharedSpecies &lt;- ReproChecklist::SharedSpeciesInferreR(ReproChecklist)
-write.csv(SharedSpecies,&quot;SharedSpecies.csv&quot;,row.names=F)</code></pre>
+write.csv(SharedSpecies,&quot;SharedSpecies.csv&quot;,row.names=F)
+# Make species richness BH world map
+ReproChecklist::SpeciesRichnessMapMakeR()</code></pre>
+<p>Here is the BH species richness map:</p>
+<center>
+<a href=""><img src="BH_Spp_Richness.png" title="SppRichBH" alt="ColBH" /></a>
+</center>
 </div>
 <div id="extract-year-of-description-using-ipni" class="section level1">
 <h1><span class="header-section-number">7</span> Extract year of description using IPNI</h1>
