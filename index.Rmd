@@ -68,7 +68,7 @@ A folder of intermediate files can be downloaded in the link below:
 You can download the *ReproChecklist* package from GitHub using the install_github package from devtools
 ```{r, eval = FALSE}
 install.packages("devtools")
-devtools::install_github("wojahn/ReproChecklist2021")
+devtools::install_github("wojahn/ReproChecklist")
 ```
 
 # Preprocess raw GBIF file into smaller files
