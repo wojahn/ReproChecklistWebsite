@@ -11,7 +11,7 @@
 
 <meta name="author" content="J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki" />
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-07-23" />
 
 <title>Reprochecklist</title>
 
@@ -21,6 +21,15 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -38,11 +47,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -55,32 +59,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -91,10 +69,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -111,40 +85,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -172,7 +119,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -184,7 +131,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -195,10 +142,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -210,7 +170,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -336,7 +295,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -376,13 +335,13 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Reprochecklist</h1>
 <h4 class="author">J. M. A. Wojahn, Felix Forest, Martin W. Callmander, and Sven Buerki</h4>
-<h4 class="date">2021-04-26</h4>
+<h4 class="date">2021-07-23</h4>
 
 </div>
 
@@ -398,7 +357,7 @@ $(document).ready(function() {
 <p>The input data (all tracheophyta restricted to only those with a physical specimen with GPS coordinates) can be accessed directly from GBIF:</p>
 <p><a href="https://doi.org/10.15468/dl.xfcbqv">Click Here to See GBIF Data</a></p>
 <p>The 2021 ReproChecklist can be downloaded in the link below:</p>
-<p><a href="https://doi.org/10.6084/m9.figshare.13720318">Click Here to Get 2021 ReproChecklist</a></p>
+<p><a href="https://doi.org/10.6084/m9.figshare.15040293">Click Here to Get 2021 ReproChecklist</a></p>
 <p>A folder of intermediate files can be downloaded in the link below:</p>
 <p><a href="https://drive.google.com/drive/folders/1pIzb27PKIq0_iA2Lz0p7vjTvPWISEkXQ?usp=sharing">Click Here to Get Intermediate Data</a></p>
 </div>
@@ -406,12 +365,13 @@ $(document).ready(function() {
 <h1><span class="header-section-number">2</span> Package Availability</h1>
 <p>You can download the <em>ReproChecklist</em> package from GitHub using the install_github package from devtools</p>
 <pre class="r"><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;wojahn/ReproChecklist&quot;)</code></pre>
+devtools::install_github(&quot;wojahn/ReproChecklist2021&quot;)</code></pre>
 </div>
 <div id="preprocess-raw-gbif-file-into-smaller-files" class="section level1">
 <h1><span class="header-section-number">3</span> Preprocess raw GBIF file into smaller files</h1>
 <p>After downloading GBIF raw file we need to preprocess it so that we can work within the confines of 16 GB RAM</p>
 <pre class="r"><code># Make intermediate
+#Make intermediate
 #Make intermediate
 system(&quot;cut  -f 1,6,9,10,22,23,33,41,45 0160938-200613084148143.csv &gt; GBIF_Traceophyta_2021Small.tab&quot;)
 #Move original to external drive or delete it to conserve memory
@@ -427,147 +387,172 @@ system(&quot;cut  -f 8 GBIF_Traceophyta_2021Small.tab &gt; IDdBy.tab&quot;)
 system(&quot;cut  -f 9 GBIF_Traceophyta_2021Small.tab &gt; RecrdedBy.tab&quot;)
 system(&quot;cut  -f 1,7 GBIF_Traceophyta_2021Small.tab &gt; gbifYearandID.tab&quot;)
 system(&quot;cut  -f 1,4 GBIF_Traceophyta_2021Small.tab &gt; IDandSpp.tab&quot;)
-system(&quot;cut  -f 1,46 0160938-200613084148143.csv &gt; IDandType.tab&quot;)</code></pre>
+system(&quot;cut  -f 1,46 0160938-200613084148143.csv &gt; IDandType.tab&quot;)
+system(&quot;cut  -f 1,37 0160938-200613084148143.csv &gt; InstCode.tab&quot;)</code></pre>
 </div>
 <div id="inferring-raw-hotspot-species-list" class="section level1">
 <h1><span class="header-section-number">4</span> Inferring raw hotspot species list</h1>
 <p>We downloaded occurrence data for Tracheophytes (vascular plants) with physical specimens from GBIF on 8 September 2020 (GBIF, 2020). A database of species occurring in the 36 BHs was inferred by the function HotspotOverlappeR using overlapping points derived from GBIF GPS data with shapefiles of the 36 hotspots (CEPF, 2016). The names of the hotspot(s) in which each taxon occurred were also recorded by the function. HotspotOverlappeR used maptools (Bivand et al., 2019) and sp (Pebesma et al., 2005).</p>
-<pre class="r"><code># Read in coordinate data, GBIF IDs, and species
+<pre class="r"><code>#Read in columns
 GBIFlat &lt;- read.delim(&quot;dLat.tab&quot;, sep = &quot;\t&quot;)
 GBIFlong &lt;- read.delim(&quot;dLong.tab&quot;, sep = &quot;\t&quot;)
 GBIFidspp &lt;- read.delim(&quot;IDandSpp.tab&quot;,sep=&quot;\t&quot;) #bc spp sometimes has tabs between them
-# Make file for overlapping
+#Make file for overlapping
 ForOverlapping &lt;- data.frame(GBIFidspp,GBIFlat,GBIFlong)
-# Destroy old variables to conserve RAM
-rm(c(GBIFidspp,GBIFlat,GBIFlong))
+#Destroy old variables to conserve memory
+rm(GBIFidspp)
+rm(GBIFlat)
+rm(GBIFlong)
 gc()
-# Overlap with hotspots shapefile
-HotspotsSpp &lt;- ReproChecklist::HotspotOverlappeR(ForOverlapping)
+#Overlap with hotspots shapefile
+HotspotsSpp &lt;- Reprochecklist::HotspotOverlappeR(ForOverlapping)
 write.csv(HotspotsSpp,&quot;HotspotSpp.csv&quot;,row.names=F)
-# Restrict to only species in hotspots
+#Restrict to only species in hotspots
 TrueHotspotSpp &lt;- HotspotsSpp[!is.na(HotspotsSpp$InHotspot),]
 write.csv(TrueHotspotSpp,&quot;TrueHotspotSpp.csv&quot;,row.names=F)
-# Remove old variables to conserve memory
+#Remove old variables to conserve memory
 rm(HotspotsSpp)
 gc()</code></pre>
 </div>
 <div id="curate-taxonomy" class="section level1">
 <h1><span class="header-section-number">5</span> Curate taxonomy</h1>
 <p>This database was then taxonomically curated using the TPL_Synonym_CheckeR, WFO_Synonym_CheckR and TaxonomyHarmonizeR functions from our package Geochecklist. Taxonomical curation prioritized the nomenclature of the more recently updated World Flora Online (WFO, 2020) while using the more comprehensive (but older) The Plant List (TPL, 2013) for taxa not in the WFO.</p>
-<pre class="r"><code># Make unique list of all species-level occurrences
+<pre class="r"><code>#Make unique list of all species-level occurrences
 UniqueHSpp &lt;- unique(as.vector(TrueHotspotSpp$Species))
-# Remove non-BH occurrences
 UniqueHSpp &lt;- UniqueHSpp[!UniqueHSpp == &quot;&quot;]
-# Compare taxonomy with The Plant List
+#Compare taxonomy with The Plant List
 TPL_Curated &lt;- ReproChecklist::TPL_Synonym_CheckeR(as.character(UniqueHSpp))
 write.csv(TPL_Curated,&quot;TPL_Curated.csv&quot;,row.names = F)
-# Compare taxonomy with World Flora Online
+#Compare taxonomy with World Flora Online
 WF_Curated &lt;- ReproChecklist::WFO_Synonym_CheckeR(as.character(UniqueHSpp))
 write.csv(WF_Curated,&quot;WF_Curated.csv&quot;,row.names = F)
-# Harmonize taxonomy between TPL and WFO, prioritizing WFO
-CuratedHSpp &lt;- ReproChecklist::TaxonomyHarmonizeR(TPL_Curated, WF_Curated, UniqueHSpp)
+#Harmonize taxonomy between TPL and WFO, prioritizing WFO
+CuratedHSpp &lt;- Reprochecklist::TaxonomyHarmonizeR(TPL_Curated, WF_Curated, UniqueHSpp)
 write.csv(CuratedHSpp,&quot;CuratedHSpp.csv&quot;,row.names = F)
-# Now apply this harmonized taxonomical framework to GBIF species
-UpdatedGBIFHSpp &lt;- ReproChecklist::GBIFTaxonomicalHarmonizeR(TrueHotspotSpp,CuratedHSpp)
-# Update column name
+#Now apply this harmonized taxonomical framework to GBIF species
+UpdatedGBIFHSpp &lt;- Reprochecklist::GBIFTaxonomicalHarmonizeR(TrueHotspotSpp,CuratedHSpp)
 colnames(UpdatedGBIFHSpp)[6] &lt;- &quot;GBIF_ID&quot;
 write.csv(UpdatedGBIFHSpp,&quot;UpdatedGBIFHSpp.csv&quot;,row.names=F)
-# Remove occurrences with empty taxonomical information
- ReproChecklist &lt;- as.data.frame(UpdatedGBIFHSpp[!UpdatedGBIFHSpp$Species == &quot;&quot;,])
- write.csv(ReproChecklist,&quot;ReproChecklist.csv&quot;,row.names=F)</code></pre>
+ Reprochecklist &lt;- as.data.frame(UpdatedGBIFHSpp[!UpdatedGBIFHSpp$Species == &quot;&quot;,])
+Reprochecklist &lt;- as.data.frame(Reprochecklist[!Reprochecklist$Species == &quot;FAIL&quot;,])
+NoAliens &lt;- ReproChecklist::InvasiveSpeciesRemoveR(Reprochecklist)
+# CropSpeciesFixed.csv is available at https://doi.org/10.6084/m9.figshare.15046524
+CropSpeciesFixed &lt;- read.csv(&quot;CropSpeciesFixed.csv&quot;) 
+Reprochecklist &lt;- ReproChecklist::CropRemoveR(NoAliens)
+ write.csv(Reprochecklist,&quot;Reprochecklist_NoAliens_NoCrops.csv&quot;,row.names=F)</code></pre>
+</div>
+<div id="create-institutions-bar-chart" class="section level1">
+<h1><span class="header-section-number">6</span> Create Institutions Bar Chart</h1>
+<p>This shows the top ten most contributive institutions for the ReproChecklist</p>
+<pre class="r"><code>InstCode &lt;- read.delim(&quot;InstCode.tab&quot;,sep=&quot;\t&quot;) #bc spp
+ReproInst &lt;- InstCode[InstCode$gbifID %in% IDz,2]
+TRI &lt;- as.data.frame(table(ReproInst))
+TRI &lt;- TRI[!TRI == &quot;&quot;,]
+TRI &lt;- TRI[!TRI == &quot; &quot;,]
+TRI &lt;- TRI[!is.na(TRI),]
+TRI &lt;- as.data.frame(TRI[order(TRI$Freq, decreasing = T),])
+TRI_top_ten &lt;- as.data.frame(TRI[1:10,])
+pdf(&quot;InstitutionBarplot.pdf&quot;)
+barplot(TRI_top_ten$Freq, names.arg = TRI_top_ten$ReproInst, las=2, ylim = c(0,1700000))
+dev.off()</code></pre>
+<p>Here is the institutions bar plot:</p>
+<center>
+<a href=""><img src="InstitutionBarplot.png" title="InsBP" alt="ColBH" /></a>
+</center>
 </div>
 <div id="calculate-number-of-collections-per-species-number-of-collections-total-and-skewness-statisitics-as-well-as-number-of-species-unique-to-each-hotspot" class="section level1">
-<h1><span class="header-section-number">6</span> Calculate number of collections per species, number of collections total, and skewness statisitics as well as number of species unique to each hotspot</h1>
+<h1><span class="header-section-number">7</span> Calculate number of collections per species, number of collections total, and skewness statisitics as well as number of species unique to each hotspot</h1>
 <p>The number of species in each BH was inferred using the function HotspotSpeciesCounteR using the outputs of HotspotOverlappeR and TaxonomyHarmonizeR. It also inferred the number of total collections per hotspot, the median number of collections per species in each hotspot, the standard deviation of the number of collections per species in each hotspot, and the Pearson’s moment coefficient of skewness of the number of collections per species in each hotspot. It used EnvStats internally (Millard, 2013). The percent of species unique to each hotspot was calculated by SharedSpeciesInferreR.</p>
-<pre class="r"><code>out &lt;- ReproChecklist::HotspotSpeciesCounteR(ReproChecklist)
-write.csv(out,&quot;HotspotSppInfo.csv&quot;,row.names=F)
-SharedSpecies &lt;- ReproChecklist::SharedSpeciesInferreR(ReproChecklist)
-write.csv(SharedSpecies,&quot;SharedSpecies.csv&quot;,row.names=F)
-# Make species richness BH world map
-ReproChecklist::SpeciesRichnessMapMakeR()</code></pre>
+<pre class="r"><code>out &lt;- ReproChecklist::HotspotSpeciesCounteR(Reprochecklist)
+write.csv(out,&quot;HotspotSppInfoNEW.csv&quot;,row.names=F)
+SharedSpecies &lt;- ReproChecklist::SharedSpeciesInferreR(Reprochecklist)
+write.csv(SharedSpecies,&quot;SharedSpeciesNEW.csv&quot;,row.names=F)
+
+ HotspotSppInfo &lt;- read.csv(&quot;HotspotSppInfoNEW.csv&quot;)
+  HotspotSppInfo &lt;- data.frame(HotspotSppInfo$Hotspot.Name,HotspotSppInfo$Number.of.Species)
+  colnames(HotspotSppInfo) &lt;- c(&quot;HotspotName&quot;,&quot;NumberSpecies&quot;)
+  HotspotSppInfo &lt;- HotspotSppInfo[order(as.numeric(HotspotSppInfo[,2]),decreasing = T),]
+  print(&quot;...ATTACHING HOTSPOTS SHAPEFILE...&quot;)
+  HSshp &lt;- maptools::readShapePoly(paste0(&quot;hotspots_2016_1/hotspots_2016_1.shp&quot;))
+  world &lt;- HSshp
+  print(&quot;...FORTIFYING...&quot;)
+  world.map &lt;- ggplot2::fortify(world, region = &quot;NAME&quot;)
+  for(i in 1:nrow(HotspotSppInfo))
+  {
+   print(paste0(&quot;Processing Hotpsot &quot;,i,&quot; of &quot;,nrow(HotspotSppInfo)))
+    world.map[which(world.map$id == HotspotSppInfo[i,1]),8] &lt;- as.numeric(HotspotSppInfo[i,2])
+  }
+  colnames(world.map)[8] &lt;- &quot;Proportion&quot;
+  print(&quot;...MAKING WORLD MAP...&quot;)
+  world     &lt;- ggplot2::map_data(&quot;world&quot;)
+  WorldMap &lt;- ggplot2::ggplot(world.map, ggplot2::aes(x = long, y = lat,
+                                                        group = group,
+                                                        fill = Proportion)) +
+  ggplot2::geom_polygon(colour = &quot;black&quot;, size = 0.1,
+                        ggplot2::aes(group = group)) +
+  ggplot2::coord_fixed(ratio = 1, xlim = NULL, ylim = NULL, expand = TRUE,
+                        clip = &quot;off&quot;) +
+  ggplot2::scale_fill_gradient2(&quot;Number\nof Species\n in BH&quot;,
+                                     limits=c(0, max(as.numeric(HotspotSppInfo[,2]))),
+                                        high = &quot;blue&quot;) +
+  ggplot2::geom_path(data=world,ggplot2::aes(x = long, y = lat,
+                                                  group = group,
+                                                  fill = NULL),size = 0.1) +
+  ggplot2::labs(y=&quot;&quot;, x = &quot;&quot;) +
+  ggplot2::theme(
+                  panel.background = ggplot2::element_rect(fill=&#39;white&#39;,
+                                                             colour=&#39;black&#39;),
+                  axis.ticks.x=ggplot2::element_blank(),
+                  axis.text.x=ggplot2::element_blank(),
+                  axis.text.y=ggplot2::element_blank(),
+                  axis.ticks.y=ggplot2::element_blank()
+                )
+  pdf(&quot;BH_Spp_Richness.pdf&quot;)
+  plot(WorldMap)
+  dev.off()</code></pre>
 <p>Here is the BH species richness map:</p>
 <center>
-<a href=""><img src="BH_Spp_Richness.png" title="SppRichBH" alt="ColBH" /></a>
-</center>
-</div>
-<div id="extract-year-of-description-using-ipni" class="section level1">
-<h1><span class="header-section-number">7</span> Extract year of description using IPNI</h1>
-<p>Next we extracted the dates of description for each of the species in the curated list as well as for names that were eliminated during curation was done using the function IPNI_Description_Date_GetteR. This function used taxize (Chamberlain et al., 2013) internally. If a taxon in the curated list was not in IPNI but its synonym was, then its synonym’s date of description was used as its date of description. If multiple dates were returned the earliest date was used as the date of description. This process was done by the functions IPNITaxonomyHarmonizeR and IPNICleaneR in our package.</p>
-<pre class="r"><code># Make unique vector of all hotspot species
-AllHSpp &lt;- unique(as.vector(c(as.character(CuratedHSpp$AcceptedName),as.character(CuratedHSpp$OldName))))
-# Set entrez key (this one is depreciated, use your personal key)
-rentrez::set_entrez_key(&quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;)
-# Get description dates
-IPNIyears &lt;- ReproChecklist::IPNI_Description_Date_GetteR(as.character(AllHSpp))
-write.csv(IPNIyears,&quot;IPNIyears.csv&quot;,row.names=F)
-# Harmonize IPNI taxonomy with curated list
-FinalIPNI &lt;- ReproChecklist::IPNITaxonomyHarmonizeR(IPNIyears,CuratedHSpp)
-write.csv(FinalIPNI,&quot;FinalIPNI.csv&quot;, row.names=F)
-# Do some stats
-length(which(FinalIPNI$DescriptionYear == &quot;NOT_IN_IPNI&quot;))
-UniqueAccepteds &lt;- unique(as.vector(CuratedHSpp$AcceptedName))
-length(UniqueAccepteds)</code></pre>
-</div>
-<div id="make-collection-and-description-yearly-curves" class="section level1">
-<h1><span class="header-section-number">8</span> Make collection and description yearly curves</h1>
-<p>Then we analysed the GBIF collection year data for all of the hotspot species by constructing curves illustrating the number of collections per year. The same process was done for the IPNI year-of-description data, where the curve showed the number of descriptions per year. The function YearlyCollectionDescriptionPlotsMakeR performed this analysis for the overall data and coplotted the 2 resultant curves. Regressions were run on the collection and description data from 2009 to 2020 for collections and descriptions using RegressionPerformeR.</p>
-<pre class="r"><code>#set output directory if want it to be different than pwd
-ID_Year &lt;- read.delim(&quot;gbifYearandID.tab&quot;, sep = &quot;\t&quot;)
-ReproChecklist::YearlyCollectionDescriptionCurvesMakeR(ReproChecklist,FinalIPNI,ID_Year)</code></pre>
-<p>Here are the yearly collection and description curves (blue is collection, orange is description, dotted is genus-only collections):</p>
-<center>
-<a href=""><img src="OverallYearlyCollectionDescriptionCurves.jpg" title="CDC" alt="CDC" /></a>
-</center>
-</div>
-<div id="make-hotspotwise-heatmaps" class="section level1">
-<h1><span class="header-section-number">9</span> Make hotspotwise heatmaps</h1>
-<p>Heatmaps of collection activity and description activity were generated using HeatmapMakeR. This function used gplots (Gregory et al., 2020) internally to create the heatmap and perform the clustering analyses. Labels were colored using visual inspection of clusters. Colrownumz and Descrownumz can be added to add group prefixes to the graph. They have the same order as would unique(UpdatedGBIFHSpp$HotspotName) as their first column and the group membership as a number in the second column.</p>
-<pre class="r"><code># Preprocess IPNI results
-IPNIReady &lt;- ReproChecklist::IPNIReadieR(FinalIPNI)
-write.csv(IPNIReady,&quot;IPNIReady.csv&quot;,row.names=F)
-# For first time set to null then add cluster order if desired
-Colrownumz &lt;- NULL
-Descrownumz &lt;- NULL
-# Set output directory if want it to be different than pwd
-OutDirectory &lt;- getwd()
-# Make collection and description heatmaps
-ReproChecklist::HeatmapMakeR(IPNIReady,ReproChecklist,OutDirectory,Colrownumz,Descrownumz, ID_Year = ID_Year))</code></pre>
-<p>Here is the collections heatmap:</p>
-<center>
-<a href=""><img src="CollectionsHM.png" title="ColBH" alt="ColBH" /></a>
-</center>
-<p>Here is the description heatmap:</p>
-<center>
-<a href=""><img src="DescriptionsHM.png" title="DescBH" alt="DescBH" /></a>
+<a href=""><img src="BH_Spp_Richness_21.png" title="SppRichBH" alt="ColBH" /></a>
 </center>
 </div>
 <div id="perform-decision-tree-analysis" class="section level1">
-<h1><span class="header-section-number">10</span> Perform decision tree analysis</h1>
+<h1><span class="header-section-number">8</span> Perform decision tree analysis</h1>
 <p>In order to calculate the levels of the Linnaean and Wallacean shortfalls for each GSB vascular plant species in each BH by running their ReproChecklist occurrences through a decision tree analysis.</p>
 <pre class="r"><code>#Perform EOO and AOO analyses for each species for each BH
-combo &lt;- ReproChecklist::EOO_AOO_AnalyzeR(ReproChecklist,
+combo &lt;- ReproChecklist::EOOAOOAnalyzeR(Reprochecklist,
                                           MinArea = 100,
                                           MinColl = 5, 
                                           AEp = 0.2,
-                                          CellDistThresh = 10
+                                          CellDistThresh = 10,
                                           samplesize = 500)
+#This part isn&#39;t necessary in future run s but to save computing time we are resticting the old combo by invasive and crops manually here, if was done to reprochecklist before then is not needed
+UniR &lt;- unique(Reprochecklist$Species)
+combo &lt;- as.data.frame(combo[combo$Species %in% UniR,])
+
+write.csv(combo,&quot;combo.csv&quot;,row.names=F)
+
+ShortfallsTable &lt;- ReproChecklist::ShortfallsTabulatoR(combo)
+
+write.csv(ShortfallsTable,&quot;ShortfallsTable.csv&quot;,row.names=F)
 
 #Construct the decision tree proper
 Tree &lt;- ReproChecklist::DecisionTreeMakeR(combo)
 library(DiagrammeR)
-plot(myproj,layout=&quot;lay&quot;)
-#save as image manually</code></pre>
+pdf(&quot;tree.pdf&quot;)
+plot(Tree,layout=&quot;lay&quot;)
+dev.off()
+  #save as image manually</code></pre>
 </div>
 <div id="here-is-the-decision-tree" class="section level1">
-<h1><span class="header-section-number">11</span> Here is the decision tree:</h1>
+<h1><span class="header-section-number">9</span> Here is the decision tree:</h1>
 <center>
-<a href=""><img src="DecisionTree.png" title="DT" alt="DT" /></a>
+<a href=""><img src="tree.png" title="DT" alt="DT" /></a>
 </center>
 </div>
 <div id="thank-you" class="section level1">
-<h1><span class="header-section-number">12</span> Thank you!</h1>
+<h1><span class="header-section-number">10</span> Thank you!</h1>
 <div id="wojahn-forest-callmander-and-buerki" class="section level2">
-<h2><span class="header-section-number">12.1</span> © 2021 Wojahn, Forest, Callmander, and Buerki</h2>
+<h2><span class="header-section-number">10.1</span> © 2021 Wojahn, Forest, Callmander, and Buerki</h2>
 </div>
 </div>
 
@@ -600,7 +585,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -609,6 +594,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
